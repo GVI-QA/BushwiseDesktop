@@ -1,59 +1,23 @@
-name: e2e
-
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-
+name: "e2e"
+on: [push]
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
+  test-e2e:
+    name: Run E2E tests
+    runs-on: ubuntu-20.04
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Use Node.js
-        uses: actions/setup-node@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: '14'
-          cache: 'npm'
-
-      - run: npm ci
-      - run: npx playwright install
-      - run: npm test
-
-      - uses: actions/upload-artifact@v2
-        with:
-          name: allure-results
-          path: allure-results
-          retention-days: 20
-
-      - name: Get Allure history
-        uses: actions/checkout@v2
+          node-version: '18'
+      - name: Install dependencies
+        run: npm ci
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+      - name: Run your tests
+        run: npx playwright test tests/home.spec.ts
+      - name: Upload test results
         if: always()
-        continue-on-error: true
+        uses: actions/upload-artifact@v4
         with:
-          repository: ${{ github.repository }}
-          ref: gh-pages
-          path: gh-pages
-
-      - name: Test marketplace action
-        uses: simple-elf/allure-report-action@master
-        if: always()
-        id: allure-report
-        with:
-          allure_results: allure-results
-          gh_pages: gh-pages
-          allure_report: allure-report
-          allure_history: allure-history
-          keep_reports: 20
-
-      - name: Deploy report to Github Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: allure-history
+          name: Test Results
+          path: test-results  
