@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx playwright install && npx playwright test tests/home.spec.ts && npx allure generate TestResults --clean"
+    "build": "npx playwright --version && npx playwright install && npx playwright test tests && npx allure generate test-results --clean"
   },
   "keywords": [],
   "author": "",
