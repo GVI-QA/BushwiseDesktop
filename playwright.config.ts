@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import ENV from './utils/env';
 
 /**
  * Read environment variables from file.
@@ -24,7 +25,9 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'https://www.bushwise.co.za',
+    // baseURL: 'https://www.bushwise.co.za',
+    // baseURL: process.env.BASE_URL,
+    baseURL: ENV.BASE_URL,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "retain-on-failure",
@@ -75,4 +78,6 @@ export default defineConfig({
   //   url: 'http://127.0.0.1:3000',
   //   reuseExistingServer: !process.env.CI,
   // },
+
+  globalSetup: "./utils/globalSetup.ts"
 });
