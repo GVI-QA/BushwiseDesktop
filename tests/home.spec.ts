@@ -41,8 +41,8 @@ test.describe('Home', () => {
           );
     })
 
-    test.skip('Navigate to the Virtual Open Day page and verify title', async ({ page }) => {
-        homePage.eventsComponent().navigateToVirtualOpenDayPage;
+    test('Navigate to the Virtual Open Day page and verify title', async ({ page }) => {
+        homePage.eventsComponent().navigateToVirtualOpenDayPage();
         await expect(page).toHaveTitle(
             "Sign up to our free Virtual Open Day | Bushwise"
           );
