@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx playwright --version && npx playwright install && test_env=international npx playwright test tests/bushwiseRecruitment.spec.ts && npx allure generate test-results --clean"
+    "build": "npx playwright --version && npx playwright install && cross-env test_env=international npx playwright test tests/bushwiseRecruitment.spec.ts && npx allure generate test-results --clean"
   },
   "keywords": [],
   "author": "",
