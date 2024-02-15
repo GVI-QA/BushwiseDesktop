@@ -1,15 +1,18 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { FullConfig } from "@playwright/test";
 import dotenv from "dotenv";
 
-async function globalSetup(config: FullConfig){
+async function globalSetup(){
     if(process.env.test_env){
 
         dotenv.config({
             path: `.env.${process.env.test_env}`,
             override:true
-        })
+        });
+    } else {
+        dotenv.config({
+            path: '.env.southafrica',
+            override:true
+        });
     }
-
 }
+
 export default globalSetup;
