@@ -1,7 +1,7 @@
 /* eslint-disable playwright/expect-expect */
 import { test, expect } from "@playwright/test";
 import BasePage from "../pages/base/basePage.page";
-import BushwiseRecruitmentPage from "../pages/bushwiseRecruitment";
+import BushwiseRecruitmentPage from "../pages/bushwiseRecruitment.page";
 
 test.describe("Bushwise Recruitment", () => {
   let bushwiseRecruitmentPage: BushwiseRecruitmentPage;
