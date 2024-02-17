@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "env:guide": "npx playwright --version && npx playwright install && rm -rf allure-results/* && cross-env test_env=international npx playwright test tests/bushwiseRecruitment.spec.ts && mv allure-report/history allure-results/history && npx allure generate allure-results --clean",
-    "env:sa": "npx playwright --version && npx playwright install && rm -rf allure-results/* && cross-env test_env=southafrica npx playwright test tests/bushwiseRecruitment.spec.ts && mv allure-report/history allure-results/history && npx allure generate allure-results --clean"
+    "env:guide": "npx playwright --version && npx playwright install && rm -rf allure-results/* && cross-env test_env=international npx playwright test tests && mv allure-report/history allure-results/history && npx allure generate allure-results --clean",
+    "env:sa": "npx playwright --version && npx playwright install && rm -rf allure-results/* && cross-env test_env=southafrica npx playwright test tests && mv allure-report/history allure-results/history && npx allure generate allure-results --clean"
   },
   "keywords": [],
   "author": "",
