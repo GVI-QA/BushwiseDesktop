@@ -1,0 +1,7 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Sat Feb 17 14:56:10 SAST 2024","Sat Feb 17 14:56:13 SAST 2024","3323","chromium","bushwiseRecruitment.spec.ts","Bushwise Recruitment","","","Verify The employment guarantee heading",""
+"passed","Sat Feb 17 14:56:07 SAST 2024","Sat Feb 17 14:56:10 SAST 2024","3181","chromium","bushwiseRecruitment.spec.ts","Bushwise Recruitment","","","Navigate to Bushwise Employment Guarantee page via link and verify title",""
+"passed","Sat Feb 17 14:56:07 SAST 2024","Sat Feb 17 14:56:09 SAST 2024","2745","chromium","bushwiseRecruitment.spec.ts","Bushwise Recruitment","","","Verify Industry first heading",""
+"passed","Sat Feb 17 14:56:07 SAST 2024","Sat Feb 17 14:56:10 SAST 2024","3404","chromium","bushwiseRecruitment.spec.ts","Bushwise Recruitment","","","Navigate to Bushwise Employment Guarantee page via Read more button and verify title",""
+"passed","Sat Feb 17 14:56:07 SAST 2024","Sat Feb 17 14:56:10 SAST 2024","3341","chromium","bushwiseRecruitment.spec.ts","Bushwise Recruitment","","","Navigate to Enquire page verify title",""
+"passed","Sat Feb 17 14:56:09 SAST 2024","Sat Feb 17 14:56:12 SAST 2024","3060","chromium","bushwiseRecruitment.spec.ts","Bushwise Recruitment","","","Verify How does it work heading",""
