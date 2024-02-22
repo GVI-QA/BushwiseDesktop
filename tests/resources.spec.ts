@@ -47,13 +47,14 @@ test.describe("Resources", () => {
     );
   });
 
-  test("Navigate to Financial Aid page and verify title", async ({
-    page,
-  }) => {
+  test("Navigate to Financial Aid page and verify title", async ({ page }) => {
+    const environmentTitles = {
+      international: "Your Best Financial Aid Options For Bushwise Courses",
+      southafrica: "Claim Financial aid | Bushwise",
+    };
     await resourcesSubmenu.navigateToFinancialAidPage();
-    await expect(page).toHaveTitle(
-      "Claim Financial aid | Bushwise", { timeout: 10000 }
-    );
+    const expectedTitle = environmentTitles[process.env.test_env || 'sa'] as string;
+    await expect(page).toHaveTitle(expectedTitle, { timeout: 10000 });
   });
 
   test("Navigate to FGASA Accreditation page and verify title", async ({
@@ -71,7 +72,6 @@ test.describe("Resources", () => {
     await resourcesSubmenu.navigateToCATHSSETAAccreditationPage();
     await expect(page).toHaveTitle(
       "Leading CATHSSETA Accredited Training Provider | Bushwise", { timeout: 10000 }
-      // "Top FGASA Endorsed Training Provider | Bushwise Field Guides"
     );
   });
 

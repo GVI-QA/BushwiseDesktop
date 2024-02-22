@@ -27,12 +27,15 @@ test.describe('Home', () => {
           );
     })
 
-    test('Navigate to the Conservation with GVI page and verify title', async ({ page }) => {
+    test("Navigate to the Conservation with GVI page and verify title", async ({ page }) => {
         await homePage.navigateToConservationWithGVIPage();
-        await expect(page).toHaveTitle(
-            "Top Wildlife Internships | GVI Limpopo South Africa"
-          );
-    })
+        const environmentTitles = {
+            southafrica: "Top Wildlife Internships | GVI Limpopo South Africa",
+            international: "Top Wildlife Internships Abroad | GVI South Africa",
+        };
+        const expectedTitle = environmentTitles[process.env.test_env || 'sa'] as string;
+        await expect(page).toHaveTitle(expectedTitle, { timeout: 10000 });
+    });
 
     test('Navigate to the Campus Open Day page and verify title', async ({ page }) => {
         homePage.eventsComponent().navigateToCampusOpenDayPage();

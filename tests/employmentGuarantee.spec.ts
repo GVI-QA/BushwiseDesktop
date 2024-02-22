@@ -14,9 +14,14 @@ test.describe("Employment Guarantee", () => {
   });
 
   test("Navigate to Field guide jobs page and verify title", async () => {
+    const environmentTitles = {
+      southafrica: "Field Guide Jobs South Africa | Wildlife Jobs | Bushwise",
+      international: "Safari Guide Jobs South Africa | Wildlife Jobs | Bushwise",
+    };
+    const expectedTitle = environmentTitles[process.env.test_env || 'sa'] as string;
     await basePage.navigateAndVerifyTitle(
       () => employmentGuaranteePage.navigateToFieldGuideJobsPage(),
-      "Field Guide Jobs South Africa | Wildlife Jobs | Bushwise"
+      expectedTitle
     );
   });
 
