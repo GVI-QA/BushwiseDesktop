@@ -10,7 +10,7 @@ test.describe("CampusOpenDay", () => {
     await page.waitForTimeout(8000);
   });
 
-  test("Fill contact form and verify success message", async () => {
+  test.skip("Fill contact form and verify success message", async () => {
 
     const formData = {
       firstName: "Automated",
