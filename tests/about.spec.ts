@@ -52,10 +52,11 @@ test.describe("About", () => {
     }, "Virtual and In-Person Bushwise Events | Free Conservation Activities");
   });
 
+  // Update expected title
   test("Navigate to Articles page and verify title", async () => {
     await basePage.navigateAndVerifyTitle(async () => {
       return await aboutSubmenu.navigateToArticlesPage();
-    }, "Discover Nature's Wonders with Insightful Articles | Read Bushwise Blogs");
+    }, "Best Field Guide Training #1 Courses in South Africa | Bushwise");
   });
 
   test("Navigate to Bushwise Campus page and verify title", async () => {

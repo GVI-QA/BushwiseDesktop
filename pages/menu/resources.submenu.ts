@@ -31,7 +31,7 @@ class ResourcesSubmenu {
 
     async navigate(){
         await this.page.goto('/');
-        await this.page.waitForLoadState('domcontentloaded');
+        await this.page.waitForLoadState('networkidle');
     }
 
     async navigateToDownloadABrochurPage(){
