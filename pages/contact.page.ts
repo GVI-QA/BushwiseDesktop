@@ -28,49 +28,55 @@ class ContactPage {
    * @returns Promise<void>
    */
   async navigate() {
-    await this.page.goto('/contact-us');
+    await this.page.goto("/contact-us");
   }
 
   /**
- * Submit the contact form with the provided form data.
- * @param formData - Object containing form data (firstName, lastName, email, etc.).
- * @returns Promise<void>
- */
-async submitForm(formData: {
-  firstName: string,
-  lastName: string,
-  email: string,
-  phone: string,
-  country: string,
-  message: string
-}): Promise<void> {
-  const frame1 = this.page.frame("htmlComp-iframe");
+   * Submit the contact form with the provided form data.
+   * @param formData - Object containing form data (firstName, lastName, email, etc.).
+   * @returns Promise<void>
+   */
+  async submitForm(formData: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    country: string;
+    message: string;
+  }): Promise<void> {
+    const frame1 = await this.page.frame(ContactPage.iframeLocator);
 
-  // Fill out the input fields with form data
-  await frame1!.fill('input[placeholder="First Name*"]', formData.firstName);
-  await frame1!.fill('input[placeholder="Last Name*"]', formData.lastName);
-  await frame1!.fill('input[placeholder="Email*"]', formData.email);
-  await frame1!.fill('input[placeholder="Phone*"]', formData.phone);
-  await frame1!.selectOption('select[name="country"]', { value: formData.country });
-  await frame1!.fill("textarea", formData.message);
+    if (!frame1) {
+      throw new Error("Frame not found");
+    }
 
-  // Select checkboxes
-  await frame1!.click("input#tc_agree");
-  await frame1!.click("input#newsletter_signup");
+    // Fill out the input fields with form data
+    await frame1.fill('input[placeholder="First Name*"]', formData.firstName);
+    await frame1.fill('input[placeholder="Last Name*"]', formData.lastName);
+    await frame1.fill('input[placeholder="Email*"]', formData.email);
+    await frame1.fill('input[placeholder="Phone*"]', formData.phone);
+    await frame1.selectOption('select[name="country"]', {
+      value: formData.country,
+    });
+    await frame1.fill("textarea", formData.message);
 
-  // Click submit (retry 2 times)
-  const submitButton = await frame1!.$("button[type='submit']");
-  for (let i = 0; i < 2; i++) {
-    await submitButton?.click();
+    // Select checkboxes
+    await frame1.click("input#tc_agree");
+    await frame1.click("input#newsletter_signup");
+
+    // Click submit (retry 2 times)
+    const submitButton = await frame1.$("button[type='submit']");
+    for (let i = 0; i < 2; i++) {
+      await submitButton?.click();
+    }
   }
-}
 
   /**
    * Verify if the success message is displayed after form submission.
    * @returns Promise<void>
    */
   async verifySuccessMessage() {
-    const frame1 = this.page.frame(ContactPage.iframeLocator);
+    const frame1 = await this.page.frame(ContactPage.iframeLocator);
     const successAlert = await frame1!.waitForSelector(
       ContactPage.thankYouMessage,
       { state: "visible" }
