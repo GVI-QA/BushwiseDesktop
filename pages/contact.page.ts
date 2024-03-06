@@ -7,6 +7,7 @@ import { Page, FrameLocator, Locator, expect } from "@playwright/test";
  */
 class ContactPage {
   private page: Page;
+  url: string = '/contact-us';
   frame1: FrameLocator;
   successTextLocator: Locator;
 
@@ -27,9 +28,14 @@ class ContactPage {
    * Navigate to the contact page.
    * @returns Promise<void>
    */
+  // async navigate() {
+  //   await this.page.goto("/contact-us");
+  // }
+
   async navigate() {
-    await this.page.goto("/contact-us");
-  }
+    await this.page.goto(this.url);
+    await this.page.waitForLoadState();
+}
 
   /**
    * Submit the contact form with the provided form data.

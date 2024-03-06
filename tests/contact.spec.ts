@@ -7,7 +7,7 @@ test.describe("Contact", () => {
   test.beforeEach(async ({ page }) => {
     contactPage = new ContactPage(page);
     await contactPage.navigate();
-    await page.waitForTimeout(8000);
+    await page.waitForTimeout(5000);
   });
 
   test("Fill contact form and verify success message", async () => {
