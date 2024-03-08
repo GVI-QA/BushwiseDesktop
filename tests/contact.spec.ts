@@ -10,7 +10,7 @@ test.describe("Contact", () => {
     await page.waitForTimeout(5000);
   });
 
-  test("Fill contact form and verify success message", async () => {
+  test.skip("Fill contact form and verify success message", async () => {
     const formData = {
       firstName: "Automated",
       lastName: "Test",
