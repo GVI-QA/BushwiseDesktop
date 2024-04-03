@@ -15,14 +15,16 @@ test.describe("Bushwise Recruitment", () => {
 
   test("Navigate to Bushwise Employment Guarantee page via link and verify title", async () => {
     await basePage.navigateAndVerifyTitle(
-      () => bushwiseRecruitmentPage.navigateToEmploymentGuaranteePageViaEnquireLink(),
+      () =>
+        bushwiseRecruitmentPage.navigateToEmploymentGuaranteePageViaEnquireLink(),
       "Employment Guarantee | Get employed with Bushwise"
     );
   });
 
   test("Navigate to Bushwise Employment Guarantee page via Read more button and verify title", async () => {
     await basePage.navigateAndVerifyTitle(
-      () => bushwiseRecruitmentPage.navigateToEmploymentGuaranteePageViaReadMoreBtn(),
+      () =>
+        bushwiseRecruitmentPage.navigateToEmploymentGuaranteePageViaReadMoreBtn(),
       "Employment Guarantee | Get employed with Bushwise"
     );
   });
@@ -33,7 +35,7 @@ test.describe("Bushwise Recruitment", () => {
       "Enquire today | Bushwise"
     );
   });
- 
+
   test("Verify Industry first heading", async () => {
     await expect(bushwiseRecruitmentPage.industryFirstHeading).toHaveText(
       "Industry first in offering a free recruitment service"

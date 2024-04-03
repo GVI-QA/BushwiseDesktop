@@ -11,7 +11,7 @@ const socialMediaTests: SocialMediaTest[] = [
   { platform: "Instagram", urlRegex: /.*instagram.*/i },
   { platform: "YouTube", urlRegex: /.*bushwise_sa.*/i },
   { platform: "Facebook", urlRegex: /.*bushwise/ },
-  { platform: "LinkedIn", urlRegex: /.*linkedin.*/i }
+  { platform: "LinkedIn", urlRegex: /.*linkedin.*/i },
 ];
 
 test.describe("SocialMedia", () => {

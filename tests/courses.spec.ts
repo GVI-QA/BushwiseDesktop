@@ -9,10 +9,13 @@ test.describe("Courses", () => {
     await coursesSubmenu.navigate();
   });
 
-  test("Navigate to the Wildlife Courses page and verify title", async ({ page }) => {
+  test("Navigate to the Wildlife Courses page and verify title", async ({
+    page,
+  }) => {
     await coursesSubmenu.navigateToCoursesPage();
     await expect(page).toHaveTitle(
-      "Wildlife Courses | Study Wildlife in South Africa", { timeout: 10000 }
+      "Wildlife Courses | Study Wildlife in South Africa",
+      { timeout: 10000 }
     );
   });
 
@@ -22,7 +25,8 @@ test.describe("Courses", () => {
     await coursesSubmenu.hoverOverCourses();
     await coursesSubmenu.navigateToProfessionalFieldGuidingPage();
     await expect(page).toHaveTitle(
-      "Professional Field Guide Course | 23 or 50 Week Course", { timeout: 10000 }
+      "Professional Field Guide Course | 23 or 50 Week Course",
+      { timeout: 10000 }
     );
   });
 
@@ -32,7 +36,8 @@ test.describe("Courses", () => {
     await coursesSubmenu.hoverOverCourses();
     await coursesSubmenu.navigateToSixtyDaySafariPage();
     await expect(page).toHaveTitle(
-      "Safari Guide Course | 60 Days to Study Wildlife", { timeout: 10000 }
+      "Safari Guide Course | 60 Days to Study Wildlife",
+      { timeout: 10000 }
     );
   });
 });

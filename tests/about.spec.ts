@@ -52,7 +52,6 @@ test.describe("About", () => {
     }, "Virtual and In-Person Bushwise Events | Free Conservation Activities");
   });
 
-  // Update expected title
   test("Navigate to Articles page and verify title", async () => {
     await basePage.navigateAndVerifyTitle(async () => {
       return await aboutSubmenu.navigateToArticlesPage();

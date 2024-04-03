@@ -11,7 +11,6 @@ test.describe("Enquire", () => {
   });
 
   test("Fill contact form and verify success message", async () => {
-
     const formData = {
       firstName: "Automated",
       lastName: "Test",
@@ -20,7 +19,7 @@ test.describe("Enquire", () => {
       country: "United Kingdom",
       course: "ZABF0039N",
       date: "2025-07-08",
-      message: "This is just a test"
+      message: "This is just a test",
     };
 
     await enquirePage.submitForm(formData);

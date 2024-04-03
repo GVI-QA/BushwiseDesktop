@@ -11,7 +11,7 @@ class OnlineCoursesSubmenu {
     constructor(page: Page){
         this.page = page;
         this.onlineCourses = page.locator("//span[contains(text(),'ONLINE COURSES')]");
-        this.fGASAFieldGuiding = page.locator("//span[contains(text(),'FGASA Field Guiding online course')]");
+        this.fGASAFieldGuiding = page.locator("//span[contains(text(),'Bushwise Field Guiding online course')]");
         this.natureEnthusiast = page.locator("//span[contains(text(),'Nature Enthusiast online course')]");
         this.introToFieldGuiding = page.locator("//span[contains(text(),'Introduction Field Guiding online course')]");
 

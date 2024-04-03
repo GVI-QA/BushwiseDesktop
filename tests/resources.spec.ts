@@ -46,25 +46,30 @@ test.describe("Resources", () => {
     await expect(page).toHaveTitle(/Financial/i, { timeout: 10000 });
   });
 
-  test("Navigate to FGASA Accreditation page and verify title", async ({
-    page,
-  }) => {
-    await resourcesSubmenu.navigateToFGASAAccreditationPage();
-    await expect(page).toHaveTitle(
-      "Top FGASA Endorsed Training Provider | Bushwise Field Guides",
-      { timeout: 30000 } // Increased timeout to 30000
-    );
-  });
-
   test("Navigate to CATHSSETA Accreditation page and verify title", async ({
     page,
   }) => {
     await resourcesSubmenu.navigateToCATHSSETAAccreditationPage();
     await expect(page).toHaveTitle(
       "Leading CATHSSETA Accredited Training Provider | Bushwise",
-      { timeout: 30000 } // Increased timeout to 30000
+      { timeout: 30000 }
     );
   });
 
-  // Rest of tests
+  test("Navigate to Bushwise Videos page and verify title", async ({
+    page,
+  }) => {
+    await resourcesSubmenu.navigateToBushwiseVideoGalleryPage();
+    await expect(page).toHaveTitle("Watch our Video Gallery | Bushwise", {
+      timeout: 30000,
+    });
+  });
+
+  test("Navigate to Bushwise Media page and verify title", async ({ page }) => {
+    await resourcesSubmenu.navigateToBushwiseMediaPage();
+    await expect(page).toHaveTitle(
+      "Special features and announcements | Bushwise in the news",
+      { timeout: 30000 }
+    );
+  });
 });

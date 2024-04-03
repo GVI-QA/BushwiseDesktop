@@ -41,8 +41,8 @@ test.describe("Home", () => {
   }) => {
     await homePage.navigateToConservationWithGVIPage();
     await expect(page).toHaveTitle(/Top Wildlife Internships/, {
-        timeout: 10000,
-      });
+      timeout: 10000,
+    });
   });
 
   test("Navigate to the Campus Open Day page and verify title", async ({

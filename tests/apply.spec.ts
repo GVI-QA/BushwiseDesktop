@@ -11,7 +11,6 @@ test.describe("Apply", () => {
   });
 
   test("Fill contact form and verify success message", async () => {
-
     const formData = {
       firstName: "Automated",
       lastName: "Test",
@@ -23,7 +22,7 @@ test.describe("Apply", () => {
       birthDay: "5",
       birthMonth: "2",
       birthYear: "1990",
-      message: "This is just a test"
+      message: "This is just a test",
     };
 
     await applyPage.submitForm(formData);

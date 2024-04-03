@@ -16,9 +16,12 @@ test.describe("Employment Guarantee", () => {
   test("Navigate to Field guide jobs page and verify title", async () => {
     const environmentTitles = {
       southafrica: "Field Guide Jobs South Africa | Wildlife Jobs | Bushwise",
-      international: "Safari Guide Jobs South Africa | Wildlife Jobs | Bushwise",
+      international:
+        "Safari Guide Jobs South Africa | Wildlife Jobs | Bushwise",
     };
-    const expectedTitle = environmentTitles[process.env.test_env || 'sa'] as string;
+    const expectedTitle = environmentTitles[
+      process.env.test_env || "sa"
+    ] as string;
     await basePage.navigateAndVerifyTitle(
       () => employmentGuaranteePage.navigateToFieldGuideJobsPage(),
       expectedTitle
@@ -27,7 +30,8 @@ test.describe("Employment Guarantee", () => {
 
   test("Navigate to Bushwise Professional Field Guide course page and verify title", async () => {
     await basePage.navigateAndVerifyTitle(
-      () => employmentGuaranteePage.navigateToBushwiseProfessionalFieldGuidePage(),
+      () =>
+        employmentGuaranteePage.navigateToBushwiseProfessionalFieldGuidePage(),
       "Professional Field Guide Course | 23 or 50 Week Course"
     );
   });
@@ -63,5 +67,4 @@ test.describe("Employment Guarantee", () => {
     );
     await expect(employmentGuaranteePage.testimonials).toBeVisible();
   });
-
 });

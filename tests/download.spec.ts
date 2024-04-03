@@ -11,13 +11,12 @@ test.describe("Download", () => {
   });
 
   test("Fill contact form and verify success message", async () => {
-
     const formData = {
       firstName: "Automated",
       lastName: "Test",
       email: "automatedtest@gviprograms.com",
       phone: "07123456789",
-      country: "United Kingdom"
+      country: "United Kingdom",
     };
 
     await downloadPage.submitForm(formData);
