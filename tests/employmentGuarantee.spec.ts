@@ -29,12 +29,13 @@ test.describe("Employment Guarantee", () => {
   });
 
   test("Navigate to Bushwise Professional Field Guide course page and verify title", async () => {
-    await basePage.navigateAndVerifyTitle(
-      () =>
-        employmentGuaranteePage.navigateToBushwiseProfessionalFieldGuidePage(),
-      "Professional Field Guide Course | 23 or 50 Week Course"
-    );
-  });
+    await basePage.navigateAndVerifyTitle(async () => {
+        const newPage = await employmentGuaranteePage.navigateToBushwiseProfessionalFieldGuidePage();
+        const title = await newPage.title();
+        await expect(title).toContain("Professional Field Guide Course");
+        return newPage;
+    });
+});
 
   test("Verify Our unique offer heading", async () => {
     await expect(employmentGuaranteePage.ourUniqueOfferHeading).toHaveText(

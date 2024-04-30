@@ -19,14 +19,14 @@ test.describe("Careers", () => {
   test("Navigate to the Placements page and verify title", async () => {
     await basePage.navigateAndVerifyTitle(
       async () => await careersSubmenu.navigateToPlacementsPage(),
-      "View our Job Placements | Bushwise"
+      "View Top Job Placements | Bushwise Field Guides"
     );
   });
 
   test("Navigate to the Employment Guarantee page and verify title", async () => {
     await basePage.navigateAndVerifyTitle(
       async () => await careersSubmenu.navigateToEmploymentGuaranteePage(),
-      "Employment Guarantee | Get employed with Bushwise"
+      "Employment Guarantee | Job Training With Bushwise"
     );
   });
 

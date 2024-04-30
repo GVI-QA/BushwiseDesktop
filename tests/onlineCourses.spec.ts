@@ -25,22 +25,23 @@ test.describe("OnlineCourses", () => {
     await onlineCoursesSubmenu.hoverOverOnlineCourses();
     await onlineCoursesSubmenu.navigateToFGASAFieldGuidingOnlineCoursePage();
     await expect(page).toHaveTitle(
-      "FGASA Field Guide Online | Top Conservation Online Course",
+      "Bushwise Field Guide Online | Top Conservation Online Course",
       { timeout: 10000 }
     );
   });
-
-  test("Navigate to the Nature Enthusiast Online Course page and verify title", async ({
-    page,
-  }) => {
+  
+  test("Navigate to the Nature Enthusiast Online Course page and verify titles", async ({ page }) => {
     await onlineCoursesSubmenu.hoverOverOnlineCourses();
     await onlineCoursesSubmenu.navigateToNatureEnthusiastOnlineCoursePage();
-    await expect(page).toHaveTitle(
-      "FGASA Nature Enthusiast | Study Wildlife Online",
-      { timeout: 10000 }
-    );
-  });
-
+    const environment = process.env.test_env || "sa";
+    const expectedTitles = {
+        "sa": "Bushwise Nature Enthusiast | Top Online Wildlife Course",
+        "international": "Bushwise Nature Enthusiast | Study Wildlife Online"
+    };
+    const expectedTitle = expectedTitles[environment];
+    await expect(page).toHaveTitle(expectedTitle, { timeout: 10000 });
+});
+  
   test("Navigate to the Introduction to Field Guiding Online Course page and verify title", async ({
     page,
   }) => {

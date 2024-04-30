@@ -18,7 +18,7 @@ test.describe("Contact", () => {
   test("Navigate to Contact page and verify title", async () => {
     await basePage.navigateAndVerifyTitle(
       async () => await contactSubmenu.navigateToContactPage(),
-      "Contact us today | Bushwise"
+      "Contact Us Today | Bushwise Field Guides"
     );
   });
 });

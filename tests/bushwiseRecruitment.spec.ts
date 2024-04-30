@@ -17,7 +17,7 @@ test.describe("Bushwise Recruitment", () => {
     await basePage.navigateAndVerifyTitle(
       () =>
         bushwiseRecruitmentPage.navigateToEmploymentGuaranteePageViaEnquireLink(),
-      "Employment Guarantee | Get employed with Bushwise"
+      "Employment Guarantee | Job Training With Bushwise"
     );
   });
 
@@ -25,14 +25,14 @@ test.describe("Bushwise Recruitment", () => {
     await basePage.navigateAndVerifyTitle(
       () =>
         bushwiseRecruitmentPage.navigateToEmploymentGuaranteePageViaReadMoreBtn(),
-      "Employment Guarantee | Get employed with Bushwise"
+      "Employment Guarantee | Job Training With Bushwise"
     );
   });
 
   test("Navigate to Enquire page verify title", async () => {
     await basePage.navigateAndVerifyTitle(
       () => bushwiseRecruitmentPage.navigateToEnquirePage(),
-      "Enquire today | Bushwise"
+      "Enquire Today | Bushwise Field Guides"
     );
   });
 

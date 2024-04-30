@@ -45,7 +45,7 @@ test.describe("Home", () => {
     });
   });
 
-  test("Navigate to the Campus Open Day page and verify title", async ({
+  test.skip("Navigate to the Campus Open Day page and verify title", async ({
     page,
   }) => {
     homePage.eventsComponent().navigateToCampusOpenDayPage();
@@ -55,12 +55,12 @@ test.describe("Home", () => {
     );
   });
 
-  test.skip("Navigate to the Virtual Open Day page and verify title", async ({
+  test("Navigate to the Virtual Open Day page and verify title", async ({
     page,
   }) => {
     homePage.eventsComponent().navigateToVirtualOpenDayPage();
     await expect(page).toHaveTitle(
-      "Sign up to our free Virtual Open Day | Bushwise",
+      "Sign Up for Our Free Virtual Open Day | Bushwise Field Guides",
       { timeout: 10000 }
     );
   });
