@@ -24,7 +24,7 @@ test.describe("Alumni stories", () => {
     basePage = new BasePage(page);
     await basePage.navigateAndVerifyTitle(
       () => alumniStoriesPage.navigateToEmploymentGuaranteePage(),
-      "Employment Guarantee | Get employed with Bushwise"
+      "Employment Guarantee | Job Training With Bushwise"
     );
   });
 
