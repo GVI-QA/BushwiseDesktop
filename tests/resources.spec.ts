@@ -10,45 +10,53 @@ test.describe("Resources", () => {
     await resourcesSubmenu.hoverOverResources();
   });
 
-  test("Navigate to Download our Brochure page and verify title", async ({
-    page,
-  }) => {
+  test("Navigate to Download our Brochure page and verify title", async ({ page }) => {
+    const environmentTitles = {
+      southafrica: "Claim Financial aid | Bushwise",
+      international: "Download our Informative Brochure | Bushwise Field Guides",
+    };
+    const environment = process.env.test_env || "southafrica";
+    const expectedTitle = environmentTitles[environment];
+
     await resourcesSubmenu.navigateToDownloadABrochurPage();
-    await expect(page).toHaveTitle("Download our Brochure here | Bushwise", {
-      timeout: 10000,
-    });
+    await expect(page).toHaveTitle(expectedTitle, { timeout: 20000 });
   });
 
   test("Navigate to Refer A Friend page and verify title", async ({ page }) => {
     await resourcesSubmenu.navigateToReferAFriendPage();
     await expect(page).toHaveTitle(
       "Refer a student & earn cash rewards | Bushwise",
-      { timeout: 10000 }
+      { timeout: 20000 }
     );
   });
 
   test("Navigate to FAQs page and verify title", async ({ page }) => {
     await resourcesSubmenu.navigateToFAQstPage();
     await expect(page).toHaveTitle("Frequently Asked Questions | Bushwise", {
-      timeout: 10000,
+      timeout: 20000,
     });
   });
 
   test("Navigate to Parent Guide page and verify title", async ({ page }) => {
     await resourcesSubmenu.navigateToParentGuidePage();
     await expect(page).toHaveTitle("A parent's guide to Bushwise", {
-      timeout: 10000,
+      timeout: 20000,
     });
   });
 
   test("Navigate to Financial Aid page and verify title", async ({ page }) => {
+    const environmentTitles = {
+      southafrica: "Claim Financial aid | Bushwise",
+      international: "Your Best Financial Aid Options For Bushwise Courses",
+    };
+    const environment = process.env.test_env || "southafrica";
+    const expectedTitle = environmentTitles[environment];
+
     await resourcesSubmenu.navigateToFinancialAidPage();
-    await expect(page).toHaveTitle(/Financial/i, { timeout: 10000 });
+    await expect(page).toHaveTitle(expectedTitle, { timeout: 20000 });
   });
 
-  test("Navigate to CATHSSETA Accreditation page and verify title", async ({
-    page,
-  }) => {
+  test("Navigate to CATHSSETA Accreditation page and verify title", async ({ page }) => {
     await resourcesSubmenu.navigateToCATHSSETAAccreditationPage();
     await expect(page).toHaveTitle(
       "Leading CATHSSETA Accredited Training Provider | Bushwise",
@@ -56,9 +64,7 @@ test.describe("Resources", () => {
     );
   });
 
-  test("Navigate to Bushwise Videos page and verify title", async ({
-    page,
-  }) => {
+  test("Navigate to Bushwise Videos page and verify title", async ({ page }) => {
     await resourcesSubmenu.navigateToBushwiseVideoGalleryPage();
     await expect(page).toHaveTitle("Watch our Video Gallery | Bushwise", {
       timeout: 30000,

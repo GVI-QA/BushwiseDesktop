@@ -9,19 +9,12 @@ test.describe("Courses", () => {
     await coursesSubmenu.navigate();
   });
 
-  test("Navigate to the Wildlife Courses page and verify title", async ({
-    page,
-  }) => {
+  test("Navigate to the Wildlife Courses page and verify title", async ({ page }) => {
     await coursesSubmenu.navigateToCoursesPage();
-    await expect(page).toHaveTitle(
-      "Wildlife Courses | Study Wildlife in South Africa",
-      { timeout: 10000 }
-    );
+    await expect(page).toHaveTitle("Wildlife Courses | Study Wildlife in South Africa", { timeout: 10000 });
   });
 
-  test("Navigate to the Professional Field Guide Course page and verify title", async ({
-    page,
-  }) => {
+  test("Navigate to the Professional Field Guide Course page and verify title", async ({ page }) => {
     const environmentTitles = {
       southafrica: "Professional Field Guide Course | 6 or 12 month Course",
       international: "Professional Field Guide Course | 23 or 50 Week Course",
@@ -35,14 +28,9 @@ test.describe("Courses", () => {
     await expect(page).toHaveTitle(expectedTitle, { timeout: 20000 });
   });
 
-  test("Navigate to the 60-day Safari Guide Course page and verify title", async ({
-    page,
-  }) => {
+  test("Navigate to the 60-day Safari Guide Course page and verify title", async ({ page }) => {
     await coursesSubmenu.hoverOverCourses();
     await coursesSubmenu.navigateToSixtyDaySafariPage();
-    await expect(page).toHaveTitle(
-      "Safari Guide Course | 60 Days to Study Wildlife",
-      { timeout: 10000 }
-    );
+    await expect(page).toHaveTitle("Safari Guide Course | 60 Days to Study Wildlife", { timeout: 10000 });
   });
 });

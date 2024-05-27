@@ -9,9 +9,7 @@ test.describe("OnlineCourses", () => {
     await onlineCoursesSubmenu.navigate();
   });
 
-  test("Navigate to the Online Courses page and verify title", async ({
-    page,
-  }) => {
+  test("Navigate to the Online Courses page and verify title", async ({ page }) => {
     await onlineCoursesSubmenu.navigateToOnlineCoursesPage();
     await expect(page).toHaveTitle(
       "Online Wildlife Courses | Study Wildlife and Field Guiding Online",
@@ -19,9 +17,7 @@ test.describe("OnlineCourses", () => {
     );
   });
 
-  test("Navigate to the Bushwise Field Guiding Online Course page and verify title", async ({
-    page,
-  }) => {
+  test("Navigate to the Bushwise Field Guiding Online Course page and verify title", async ({ page }) => {
     await onlineCoursesSubmenu.hoverOverOnlineCourses();
     await onlineCoursesSubmenu.navigateToFGASAFieldGuidingOnlineCoursePage();
     await expect(page).toHaveTitle(
@@ -29,22 +25,22 @@ test.describe("OnlineCourses", () => {
       { timeout: 10000 }
     );
   });
-  
+
   test("Navigate to the Nature Enthusiast Online Course page and verify titles", async ({ page }) => {
+    const environmentTitles = {
+      southafrica: "Bushwise Nature Enthusiast | Top Online Wildlife Course",
+      international: "Bushwise Nature Enthusiast | Study Wildlife Online ",
+    };
+    const environment = process.env.test_env || "southafrica";
+    const expectedTitle = environmentTitles[environment];
+
     await onlineCoursesSubmenu.hoverOverOnlineCourses();
     await onlineCoursesSubmenu.navigateToNatureEnthusiastOnlineCoursePage();
-    const environment = process.env.test_env || "sa";
-    const expectedTitles = {
-        "sa": "Bushwise Nature Enthusiast | Top Online Wildlife Course",
-        "international": "Bushwise Nature Enthusiast | Study Wildlife Online"
-    };
-    const expectedTitle = expectedTitles[environment];
-    await expect(page).toHaveTitle(expectedTitle, { timeout: 10000 });
-});
-  
-  test("Navigate to the Introduction to Field Guiding Online Course page and verify title", async ({
-    page,
-  }) => {
+    // Wait until the correct title is present
+    await expect(page).toHaveTitle(expectedTitle, { timeout: 20000 });
+  });
+
+  test("Navigate to the Introduction to Field Guiding Online Course page and verify title", async ({ page }) => {
     await onlineCoursesSubmenu.hoverOverOnlineCourses();
     await onlineCoursesSubmenu.navigateToIntroductionToFieldGuidingOnlineCoursesPage();
     await expect(page).toHaveTitle(

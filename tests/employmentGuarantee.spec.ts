@@ -1,71 +1,61 @@
 /* eslint-disable playwright/expect-expect */
 import { test, expect } from "@playwright/test";
-import BasePage from "../pages/base/basePage.page";
 import EmploymentGuaranteePage from "../pages/employmentGuarentee.page";
+// import BasePage from "../pages/base/basePage.page";
 
 test.describe("Employment Guarantee", () => {
   let employmentGuaranteePage: EmploymentGuaranteePage;
-  let basePage: BasePage;
+  // let basePage: BasePage;
 
   test.beforeEach(async ({ page }) => {
     employmentGuaranteePage = new EmploymentGuaranteePage(page);
-    basePage = new BasePage(page);
+    // basePage = new BasePage(page);
     await employmentGuaranteePage.navigateTo();
   });
 
-  test("Navigate to Field guide jobs page and verify title", async () => {
+  test("Navigate to Field guide jobs page and verify title", async ({ page }) => {
     const environmentTitles = {
       southafrica: "Field Guide Jobs South Africa | Wildlife Jobs | Bushwise",
-      international:
-        "Safari Guide Jobs South Africa | Wildlife Jobs | Bushwise",
+      international: "Safari Guide Jobs South Africa | Wildlife Jobs | Bushwise",
     };
-    const expectedTitle = environmentTitles[
-      process.env.test_env || "sa"
-    ] as string;
-    await basePage.navigateAndVerifyTitle(
-      () => employmentGuaranteePage.navigateToFieldGuideJobsPage(),
-      expectedTitle
-    );
+    const environment = process.env.test_env || "southafrica";
+    const expectedTitle = environmentTitles[environment] as string;
+
+    await employmentGuaranteePage.navigateToFieldGuideJobsPage();
+    await expect(page).toHaveTitle(expectedTitle, { timeout: 10000 });
   });
 
   test("Navigate to Bushwise Professional Field Guide course page and verify title", async () => {
-    await basePage.navigateAndVerifyTitle(async () => {
-        const newPage = await employmentGuaranteePage.navigateToBushwiseProfessionalFieldGuidePage();
-        const title = await newPage.title();
-        await expect(title).toContain("Professional Field Guide Course");
-        return newPage;
-    });
-});
+    const environmentTitles = {
+      southafrica: "Professional Field Guide Course | 6 or 12 month Course",
+      international: "Professional Field Guide Course | 23 or 50 Week Course",
+    };
+    const environment = process.env.test_env || "southafrica";
+    const expectedTitle = environmentTitles[environment] as string;
 
-  test("Verify Our unique offer heading", async () => {
-    await expect(employmentGuaranteePage.ourUniqueOfferHeading).toHaveText(
-      "Our unique offer"
-    );
+    const newPage = await employmentGuaranteePage.navigateToBushwiseProfessionalFieldGuidePage();
+    await expect(newPage).toHaveTitle(expectedTitle, { timeout: 20000 });
   });
 
-  test("Navigate to Application page and verify title", async () => {
-    await basePage.navigateAndVerifyTitle(
-      () => employmentGuaranteePage.navigateToApplicationPage(),
-      "Apply Now | Bushwise"
-    );
+  test("Verify Our unique offer heading", async () => {
+    await expect(employmentGuaranteePage.ourUniqueOfferHeading).toHaveText("Our unique offer");
+  });
+
+  test("Navigate to Application page and verify title", async ({ page }) => {
+    await employmentGuaranteePage.navigateToApplicationPage();
+    await expect(page).toHaveTitle("Apply Now | Bushwise", { timeout: 10000 });
   });
 
   test("Verify Your money back heading", async () => {
-    await expect(employmentGuaranteePage.yourMoneyBackHeading).toHaveText(
-      "Your money back"
-    );
+    await expect(employmentGuaranteePage.yourMoneyBackHeading).toHaveText("Your money back");
   });
 
   test("Verify How it works heading", async () => {
-    await expect(employmentGuaranteePage.howItWorksHeading).toHaveText(
-      "How it works"
-    );
+    await expect(employmentGuaranteePage.howItWorksHeading).toHaveText("How it works");
   });
 
   test("Verify Our Alumni heading", async () => {
-    await expect(employmentGuaranteePage.ourAlumniHeading).toHaveText(
-      "Our Alumni"
-    );
+    await expect(employmentGuaranteePage.ourAlumniHeading).toHaveText("Our Alumni");
     await expect(employmentGuaranteePage.testimonials).toBeVisible();
   });
 });
