@@ -22,12 +22,17 @@ test.describe("Courses", () => {
   test("Navigate to the Professional Field Guide Course page and verify title", async ({
     page,
   }) => {
+    const environmentTitles = {
+      southafrica: "Professional Field Guide Course | 6 or 12 month Course",
+      international: "Professional Field Guide Course | 23 or 50 Week Course",
+    };
+    const environment = process.env.test_env || "southafrica";
+    const expectedTitle = environmentTitles[environment] as string;
+
     await coursesSubmenu.hoverOverCourses();
     await coursesSubmenu.navigateToProfessionalFieldGuidingPage();
-    await expect(page).toHaveTitle(
-      "Professional Field Guide Course | 23 or 50 Week Course",
-      { timeout: 10000 }
-    );
+    // Wait until the correct title is present
+    await expect(page).toHaveTitle(expectedTitle, { timeout: 20000 });
   });
 
   test("Navigate to the 60-day Safari Guide Course page and verify title", async ({

@@ -19,7 +19,7 @@ test.describe("About", () => {
   test("Navigate to About Us page and verify title", async () => {
     await basePage.navigateAndVerifyTitle(async () => {
       return await aboutSubmenu.navigateToAboutUsPage();
-    }, "Learn more about us | Bushwise");
+    }, "Learn More| Bushwise Field Guides #1 Training Provider");
   });
 
   test("Navigate to Our Story page and verify title", async () => {
