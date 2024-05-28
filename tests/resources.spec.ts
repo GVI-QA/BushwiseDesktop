@@ -12,8 +12,8 @@ test.describe("Resources", () => {
 
   test("Navigate to Download our Brochure page and verify title", async ({ page }) => {
     const environmentTitles = {
-      southafrica: "Claim Financial aid | Bushwise",
-      international: "Download our Informative Brochure | Bushwise Field Guides",
+      southafrica: "Download our Informative Brochure | Bushwise Field Guides",
+      international: "Download our Brochure here | Bushwise",
     };
     const environment = process.env.test_env || "southafrica";
     const expectedTitle = environmentTitles[environment];
