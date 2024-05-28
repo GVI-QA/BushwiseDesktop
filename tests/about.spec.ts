@@ -1,5 +1,5 @@
 /* eslint-disable playwright/expect-expect */
-import { Page, test } from "@playwright/test";
+import { test, Page } from "@playwright/test";
 import AboutSubmenu from "../pages/menu/about.submenu";
 import BasePage from "../pages/base/basePage.page";
 
@@ -17,9 +17,16 @@ test.describe("About", () => {
   });
 
   test("Navigate to About Us page and verify title", async () => {
+    const environmentTitles = {
+      southafrica: "Learn More| Bushwise Field Guides #1 Training Provider",
+      international: "Learn more about us | Bushwise"
+    };
+    const environment = process.env.test_env || "southafrica";
+    const expectedTitle = environmentTitles[environment];
+
     await basePage.navigateAndVerifyTitle(async () => {
       return await aboutSubmenu.navigateToAboutUsPage();
-    }, "Learn More| Bushwise Field Guides #1 Training Provider");
+    }, expectedTitle);
   });
 
   test("Navigate to Our Story page and verify title", async () => {
