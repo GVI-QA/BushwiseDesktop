@@ -10,7 +10,7 @@ class CoursesSubmenu {
     constructor(page: Page){
         this.page = page;
         this.courses = page.locator("(//div[@class='itemDepth02233374943__container'])[1]");
-        this.professionalFieldGuide = page.locator("//span[contains(text(),'Bushwise Professional Field Guide Course')]");
+        this.professionalFieldGuide = page.locator("//span[contains(text(),'Bushwise International Field Guide Course')]");
         this.sixtyDaySafari = page.locator("//span[contains(text(),'Bushwise 60-day Safari Guide Course')]");
     }
 
