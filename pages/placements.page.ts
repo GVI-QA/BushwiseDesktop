@@ -46,7 +46,7 @@ class PlacementsPage extends BasePage {
         this.gviLimpopo = page.locator("//h5[normalize-space()='GVI Limpopo']");
         this.leoAfrica = page.locator("//h5[normalize-space()='LEO Africa']");
         this.makalaliReserve = page.locator("//span[normalize-space()='Makalali Reserve']");
-        this.bushwiseProfessionalFieldGuideLink = page.locator("//a[normalize-space()='Bushwise Professional Field Guide course']");
+        this.bushwiseProfessionalFieldGuideLink = page.locator("//a[normalize-space()='Bushwise International Field Guide course']");
     }
 
     async navigateTo() {
