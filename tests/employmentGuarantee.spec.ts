@@ -1,15 +1,12 @@
 /* eslint-disable playwright/expect-expect */
 import { test, expect } from "@playwright/test";
 import EmploymentGuaranteePage from "../pages/employmentGuarentee.page";
-// import BasePage from "../pages/base/basePage.page";
 
 test.describe("Employment Guarantee", () => {
   let employmentGuaranteePage: EmploymentGuaranteePage;
-  // let basePage: BasePage;
 
   test.beforeEach(async ({ page }) => {
     employmentGuaranteePage = new EmploymentGuaranteePage(page);
-    // basePage = new BasePage(page);
     await employmentGuaranteePage.navigateTo();
   });
 
@@ -27,8 +24,8 @@ test.describe("Employment Guarantee", () => {
 
   test("Navigate to Bushwise Professional Field Guide course page and verify title", async () => {
     const environmentTitles = {
-      southafrica: "Professional Field Guide Course | 6 or 12 month Course",
-      international: "Professional Field Guide Course | 23 or 50 Week Course",
+      southafrica: "International Field Guide Course | 6 or 12 month Course",
+      international: "International Safari Guide Course | 23 or 50 Week Course",
     };
     const environment = process.env.test_env || "southafrica";
     const expectedTitle = environmentTitles[environment] as string;

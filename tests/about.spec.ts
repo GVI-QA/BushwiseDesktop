@@ -18,7 +18,7 @@ test.describe("About", () => {
 
   test("Navigate to About Us page and verify title", async () => {
     const environmentTitles = {
-      southafrica: "Learn More| Bushwise Field Guides #1 Training Provider",
+      southafrica: "Learn More | Bushwise Field Guides #1 Training Provider",
       international: "Learn more about us | Bushwise"
     };
     const environment = process.env.test_env || "southafrica";

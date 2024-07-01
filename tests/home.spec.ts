@@ -45,17 +45,17 @@ test.describe("Home", () => {
     });
   });
 
-  test.skip("Navigate to the Campus Open Day page and verify title", async ({
+  test("Navigate to the Campus Open Day page and verify title", async ({
     page,
   }) => {
     homePage.eventsComponent().navigateToCampusOpenDayPage();
     await expect(page).toHaveTitle(
-      "Join us for our upcoming Campus Open Day | Bushwise",
+      "Join Our Free Campus Open Day | Bushwise Field Guides",
       { timeout: 10000 }
     );
   });
 
-  test.skip("Navigate to the Virtual Open Day page and verify title", async ({
+  test("Navigate to the Virtual Open Day page and verify title", async ({
     page,
   }) => {
     homePage.eventsComponent().navigateToVirtualOpenDayPage();

@@ -16,21 +16,27 @@ test.describe("Courses", () => {
 
   test("Navigate to the Professional Field Guide Course page and verify title", async ({ page }) => {
     const environmentTitles = {
-      southafrica: "Professional Field Guide Course | 6 or 12 month Course",
-      international: "Professional Field Guide Course | 23 or 50 Week Course",
+      southafrica: "International Field Guide Course | 6 or 12 month Course",
+      international: "International Safari Guide Course | 23 or 50 Week Course",
     };
     const environment = process.env.test_env || "southafrica";
     const expectedTitle = environmentTitles[environment] as string;
 
     await coursesSubmenu.hoverOverCourses();
     await coursesSubmenu.navigateToProfessionalFieldGuidingPage();
-    // Wait until the correct title is present
     await expect(page).toHaveTitle(expectedTitle, { timeout: 20000 });
   });
 
   test("Navigate to the 60-day Safari Guide Course page and verify title", async ({ page }) => {
+    const environmentTitles = {
+      southafrica: "Field Guide Course | 60 Days to Study Wildlife",
+      international: "Safari Guide Course | 60 Days to Study Wildlife",
+    };
+    const environment = process.env.test_env || "southafrica";
+    const expectedTitle = environmentTitles[environment] as string;
+
     await coursesSubmenu.hoverOverCourses();
     await coursesSubmenu.navigateToSixtyDaySafariPage();
-    await expect(page).toHaveTitle("Safari Guide Course | 60 Days to Study Wildlife", { timeout: 10000 });
+    await expect(page).toHaveTitle(expectedTitle, { timeout: 20000 });
   });
 });
