@@ -1,5 +1,5 @@
 /* eslint-disable playwright/expect-expect */
-import { test, Page } from "@playwright/test";
+import { test, Page, expect } from "@playwright/test";
 import AboutSubmenu from "../pages/menu/about.submenu";
 import BasePage from "../pages/base/basePage.page";
 
@@ -59,11 +59,18 @@ test.describe("About", () => {
     }, "Virtual and In-Person Bushwise Events | Free Conservation Activities");
   });
 
-  test("Navigate to Articles page and verify title", async () => {
-    await basePage.navigateAndVerifyTitle(async () => {
-      return await aboutSubmenu.navigateToArticlesPage();
-    }, "Best Field Guide Training #1 Courses in South Africa | Bushwise");
+  test("Navigate to Articles page and verify title", async ({ page }) => {
+    const environmentTitles = {
+      southafrica: "News from the field",
+      international: "Discover Nature's Wonders with Insightful Articles | Read Bushwise Blogs"
+    };
+    const environment = process.env.test_env || "southafrica";
+    const expectedTitle = environmentTitles[environment] as string;
+
+    await aboutSubmenu.navigateToArticlesPage();
+    await expect(page).toHaveTitle(expectedTitle, { timeout: 10000 });
   });
+
 
   test("Navigate to Bushwise Campus page and verify title", async () => {
     await basePage.navigateAndVerifyTitle(async () => {
