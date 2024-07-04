@@ -7,10 +7,14 @@ class CoursesSubmenu {
     professionalFieldGuide: Locator;
     sixtyDaySafari: Locator;
     
-    constructor(page: Page){
+    constructor(page: Page, environment: string) {
         this.page = page;
         this.courses = page.locator("(//div[@class='itemDepth02233374943__container'])[1]");
-        this.professionalFieldGuide = page.locator("//span[normalize-space()='Bushwise International Safari Guide Course']");
+        if (environment === 'southafrica') {
+            this.professionalFieldGuide = page.locator("(//span[contains(text(),'Bushwise International Field Guide Course')])[1]");
+          } else if (environment === 'international') {
+            this.professionalFieldGuide = page.locator("(//span[contains(text(),'Bushwise International Safari Guide Course')])[1]");
+          }
         this.sixtyDaySafari = page.locator("//span[contains(text(),'Bushwise 60-day Safari Guide Course')]");
     }
 

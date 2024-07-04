@@ -6,7 +6,8 @@ test.describe("Placements", () => {
   let placementsPage: PlacementsPage;
 
   test.beforeEach(async ({ page }) => {
-    placementsPage = new PlacementsPage(page);
+    const environment = process.env.test_env || "southafrica";
+    placementsPage = new PlacementsPage(page, environment);
     await placementsPage.navigateTo();
   });
 

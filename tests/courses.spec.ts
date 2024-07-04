@@ -1,11 +1,13 @@
 import { test, expect } from "@playwright/test";
 import CoursesSubmenu from "../pages/menu/courses.submenu";
+// import { env } from "process";
 
 test.describe("Courses", () => {
   let coursesSubmenu: CoursesSubmenu;
 
   test.beforeEach(async ({ page }) => {
-    coursesSubmenu = new CoursesSubmenu(page);
+    const environment = process.env.test_env || "southafrica";
+    coursesSubmenu = new CoursesSubmenu(page, environment);
     await coursesSubmenu.navigate();
   });
 

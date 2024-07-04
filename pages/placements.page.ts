@@ -25,7 +25,7 @@ class PlacementsPage extends BasePage {
     bushwiseProfessionalFieldGuideLink: Locator;
   
 
-    constructor(page: Page) {
+    constructor(page: Page, environment: string) {
       super(page);
         this.page = page;
         this.placementsLodgesHeading = page.locator("//span[contains(text(),'Placements at prestigious lodges and reserves in S')]");
@@ -46,7 +46,11 @@ class PlacementsPage extends BasePage {
         this.gviLimpopo = page.locator("//h5[normalize-space()='GVI Limpopo']");
         this.leoAfrica = page.locator("//h5[normalize-space()='LEO Africa']");
         this.makalaliReserve = page.locator("//span[normalize-space()='Makalali Reserve']");
-        this.bushwiseProfessionalFieldGuideLink = page.locator("//a[normalize-space()='Bushwise International Field Guide course']");
+        if (environment === 'southafrica') {
+            this.bushwiseProfessionalFieldGuideLink = page.locator("//a[normalize-space()='Bushwise International Field Guide course']");
+          } else if (environment === 'international') {
+            this.bushwiseProfessionalFieldGuideLink = page.locator("//a[normalize-space()='Bushwise International Safari Guide course']");
+          }
     }
 
     async navigateTo() {

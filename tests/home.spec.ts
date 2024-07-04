@@ -10,10 +10,13 @@ test.describe("Home", () => {
   });
 
   test("Navigate to HomePage and verify title", async ({ page }) => {
-    await expect(page).toHaveTitle(
-      "Best Field Guide Training #1 Courses in South Africa | Bushwise",
-      { timeout: 10000 }
-    );
+    const environmentTitles = {
+      southafrica: "Best Field Guide Training #1 Courses in South Africa | Bushwise",
+      international: "Best Safari Guide Training #1 Courses in South Africa | Bushwise",
+    };
+    const environment = process.env.test_env || "southafrica";
+    const expectedTitle = environmentTitles[environment] as string;
+    await expect(page).toHaveTitle(expectedTitle, { timeout: 10000 });
   });
 
   test("Navigate to the Wildlife Courses page and verify title", async ({

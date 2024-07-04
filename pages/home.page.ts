@@ -20,7 +20,9 @@ class HomePage {
         this.learnOnlineBtn = page.locator("//span[normalize-space()='Learn online']");
         this.experienceMoreBtn = page.locator("//span[normalize-space()='Experience more']");
         this.campusOnlineRegisterBtn = page.locator("(//a[@class='VU4Mnk wixui-button PlZyDq'])[1]");
-        this.virtualOnlineRegisterBtn = page.locator("(//a[@class='TFOeq0 wixui-button zKbzSQ'])[2]");
+        // this.virtualOnlineRegisterBtn = page.locator("(//a[@class='TFOeq0 wixui-button zKbzSQ'])[2]");
+        // this.virtualOnlineRegisterBtn = page.locator("(//a[@class='VU4Mnk wixui-button PlZyDq'])[2]");
+        this.virtualOnlineRegisterBtn = page.locator("#comp-lo6v2ke0_r_comp-lnx4lwic8 > a");
         this.webinarRegisterBtn = page.locator("div[id='comp-lo6v2ke0_r_comp-lnx4m1if'] span[class='kclxHl wixui-button__label']");
         this.instagramLink = page.locator("//a[normalize-space()='@bushwise']");
         this.headingText = page.locator('text=Choose your');
