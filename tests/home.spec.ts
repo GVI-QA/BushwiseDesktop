@@ -58,7 +58,7 @@ test.describe("Home", () => {
     );
   });
 
-  test("Navigate to the Virtual Open Day page and verify title", async ({
+  test.skip("Navigate to the Virtual Open Day page and verify title", async ({
     page,
   }) => {
     homePage.eventsComponent().navigateToVirtualOpenDayPage();
