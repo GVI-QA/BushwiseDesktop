@@ -37,17 +37,17 @@ class ApplyPage {
    * @returns Promise<void>
    */
   async submitForm(formData: {
-    firstName: string,
-    lastName: string,
-    email: string,
-    phone: string,
-    country: string,
-    course: string,
-    date: string,
-    message: string,
-    birthDay: string,
-    birthMonth: string,
-    birthYear: string
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    country: string;
+    course: string;
+    date: string;
+    message: string;
+    birthDay: string;
+    birthMonth: string;
+    birthYear: string;
   }): Promise<void> {
     const frame1 = this.page.frame("htmlComp-iframe");
 
@@ -64,12 +64,6 @@ class ApplyPage {
     });
     await frame1!.selectOption('select[name="departure_date"]', {
       value: formData.date,
-    });
-    await frame1!.selectOption('select[name="dob_d"]', {
-      value: formData.birthDay,
-    });
-    await frame1!.selectOption('select[name="dob_m"]', {
-      value: formData.birthMonth,
     });
     await frame1!.selectOption('select[name="dob_y"]', {
       value: formData.birthYear,
