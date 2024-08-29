@@ -1,32 +1,25 @@
 import { expect, test } from "@playwright/test";
 import ApplyPage from "../pages/apply.page";
+import { applyTestData } from "../test-data/test-data";
 
 test.describe("Apply", () => {
   let applyPage: ApplyPage;
 
+  // Run before each test to set up the ApplyPage instance and navigate to the form page
   test.beforeEach(async ({ page }) => {
     applyPage = new ApplyPage(page);
     await applyPage.navigate();
-    await page.waitForTimeout(5000);
+    await page.waitForTimeout(5000); // Wait to ensure page elements are fully loaded
   });
 
-  test("Fill contact form and verify success message", async () => {
-    const formData = {
-      firstName: "Automated",
-      lastName: "Test",
-      email: "automatedtest@gviprograms.com",
-      phone: "07123456789",
-      country: "United Kingdom",
-      course: "ZABF0039N",
-      date: "2025-07-08",
-      birthDay: "5",
-      birthMonth: "2",
-      birthYear: "1990",
-      message: "This is just a test",
-    };
+  // Iterate over each test case in the applyTestData array
+  applyTestData.forEach(({ testName, formData }) => {
+    // Define a test for each data set
+    test(`${testName}`, async () => {
+      await applyPage.submitForm(formData); // Submit the form with the given data
 
-    await applyPage.submitForm(formData);
-
-    expect(applyPage.verifySuccessMessage).toBeTruthy();
+      const isSuccess = await applyPage.verifySuccessMessage(); // Check for success message
+      expect(isSuccess).toBeTruthy(); // Verify that the success message is displayed
+    });
   });
 });
