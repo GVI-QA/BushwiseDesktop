@@ -5,19 +5,24 @@ class ApplyPage {
   frame1: FrameLocator;
   successTextLocator: Locator;
 
-  static iframeLocator = "htmlComp-iframe"; // Locator for the iframe containing the form
+  static iframeLocator = "htmlComp-iframe";
   static thankYouMessage =
-    '//h1[normalize-space()="Thank you for reaching out to Bushwise."]'; // XPath for the success message
+    '//h1[normalize-space()="Thank you for reaching out to Bushwise."]';
 
   constructor(page: Page) {
     this.page = page;
-    this.frame1 = page.frameLocator(ApplyPage.iframeLocator); // Initialize iframe locator
-    this.successTextLocator = this.frame1.locator(ApplyPage.thankYouMessage); // Initialize success message locator
+    this.frame1 = page.frameLocator(ApplyPage.iframeLocator);
+    this.successTextLocator = this.frame1.locator(ApplyPage.thankYouMessage);
   }
 
   // Navigate to the apply page
   async navigate() {
-    await this.page.goto("/apply-now");
+    await this.page.goto("/apply-now", { timeout: 60000 });
+    // eslint-disable-next-line playwright/no-wait-for-selector
+    await this.page.waitForSelector(
+      `iframe[name="${ApplyPage.iframeLocator}"]`,
+      { state: "attached", timeout: 60000 }
+    );
   }
 
   // Fill out and submit the form with provided data
@@ -35,7 +40,7 @@ class ApplyPage {
     fieldExperience?: string;
     grantValue?: string;
   }): Promise<void> {
-    const frame1 = this.page.frame(ApplyPage.iframeLocator); // Get the iframe
+    const frame1 = this.page.frame(ApplyPage.iframeLocator);
 
     // Fill out the form fields
     await frame1!.fill('input[placeholder="First Name*"]', formData.firstName);
@@ -52,57 +57,61 @@ class ApplyPage {
       value: formData.date,
     });
 
-    // Optionally fill additional fields based on provided data
+    // Optionally fill additional fields
     if (formData.levelOfEducation) {
       await frame1!.selectOption('select[name="highest_level_of_education"]', {
         value: formData.levelOfEducation,
       });
     }
-
     if (formData.fieldExperience) {
       await frame1!.selectOption('select[name="field_experience"]', {
         value: formData.fieldExperience,
       });
     }
 
+    // Handle grantValue field if provided
     if (formData.grantValue) {
-      await frame1!.selectOption('select[name="grant_value"]', {
-        value: formData.grantValue,
-      });
+      const grantValueExists = await frame1!.$('select[name="grant_value"]');
+      if (grantValueExists) {
+        await frame1!.selectOption('select[name="grant_value"]', {
+          value: formData.grantValue,
+        });
 
-      // Click additional options if grantValue is provided
-      await frame1!.click("input#personal_savings");
-      await frame1!.click("input#parents-or-caregivers");
-      await frame1!.click("input#personal-loans");
-      await frame1!.click("input#inheritance");
-      await frame1!.click("input#fundraising");
+        // Click additional funding source options
+        await frame1!.click("input#personal_savings");
+        await frame1!.click("input#parents-or-caregivers");
+        await frame1!.click("input#personal-loans");
+        await frame1!.click("input#inheritance");
+        await frame1!.click("input#fundraising");
+      }
     }
 
-    // Fill out remaining fields and submit the form
+    // Fill out the remaining fields and submit the form
     await frame1!.selectOption('select[name="dob_y"]', {
       value: formData.birthYear,
     });
     await frame1!.fill("textarea", formData.message);
 
-    await frame1!.click("input#tc_agree"); // Agree to terms and conditions
-    await frame1!.click("input#newsletter_signup"); // Optionally sign up for newsletter
+    await frame1!.click("input#tc_agree");
+    await frame1!.click("input#newsletter_signup");
 
+    // Submit the form by clicking the submit button twice
     const submitButton = await frame1!.$("button[type='submit']");
     for (let i = 0; i < 2; i++) {
-      await submitButton?.click(); // Click the submit button twice
+      await submitButton?.click();
     }
   }
 
   // Verify if the success message is displayed
   async verifySuccessMessage(): Promise<boolean> {
-    const frame1 = this.page.frame(ApplyPage.iframeLocator); // Get the iframe
+    const frame1 = this.page.frame(ApplyPage.iframeLocator);
     const successAlert = await frame1!.waitForSelector(
       ApplyPage.thankYouMessage,
-      { state: "visible", timeout: 10000 } // Wait for the success message to appear
+      { state: "visible", timeout: 10000 }
     );
 
     if (successAlert) {
-      const successText = await successAlert.textContent(); // Get the text content of the success message
+      const successText = await successAlert.textContent();
       return (
         successText?.includes("Thank you for reaching out to Bushwise.") ??
         false

@@ -1,16 +1,11 @@
 import { Page, FrameLocator, Locator, expect } from "@playwright/test";
 
-/**
- * EnquirePage class represents the page object for the enquiry form.
- * It provides methods to navigate to the enquire page, submit the form,
- * and verify the success message.
- */
 class EnquirePage {
   private page: Page;
   frame1: FrameLocator;
   successTextLocator: Locator;
 
-  // Define static constants for locators
+  // Static locators for iframe and success message
   static iframeLocator = "htmlComp-iframe";
   static thankYouMessage =
     '//h1[normalize-space()="Thank you for reaching out to Bushwise."]';
@@ -18,61 +13,60 @@ class EnquirePage {
   constructor(page: Page) {
     this.page = page;
     this.frame1 = page.frameLocator(EnquirePage.iframeLocator);
-
-    // Set successText locator within the frame
     this.successTextLocator = this.frame1.locator(EnquirePage.thankYouMessage);
   }
 
-  /**
-   * Navigate to the enquire page.
-   * @returns Promise<void>
-   */
+  // Navigate to the enquire page and wait for iframe to load
   async navigate() {
-    await this.page.goto('/enquire');
+    await this.page.goto("/enquire", { timeout: 60000 });
+    // eslint-disable-next-line playwright/no-wait-for-selector
+    await this.page.waitForSelector(
+      `iframe[name="${EnquirePage.iframeLocator}"]`,
+      { state: "attached", timeout: 60000 }
+    );
   }
 
-  /**
-   * Submit the enquiry form with the provided form data.
-   * @param formData - Object containing form data (firstName, lastName, email, etc.).
-   * @returns Promise<void>
-   */
+  // Submit the enquiry form with provided data
   async submitForm(formData: {
-    firstName: string,
-    lastName: string,
-    email: string,
-    phone: string,
-    country: string,
-    course: string,
-    date: string,
-    message: string
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    country: string;
+    course: string;
+    date: string;
+    message: string;
   }): Promise<void> {
-    const frame1 = this.page.frame("htmlComp-iframe");
-  
-    // Fill out the input fields with form data
+    const frame1 = this.page.frame(EnquirePage.iframeLocator);
+
+    // Fill out form fields
     await frame1!.fill('input[placeholder="First Name*"]', formData.firstName);
     await frame1!.fill('input[placeholder="Last Name*"]', formData.lastName);
     await frame1!.fill('input[placeholder="Email*"]', formData.email);
     await frame1!.fill('input[placeholder="Phone*"]', formData.phone);
-    await frame1!.selectOption('select[name="country"]', { value: formData.country });
-    await frame1!.selectOption('select[name="course"]', { value: formData.course });
-    await frame1!.selectOption('select[name="departure_date"]', { value: formData.date });
+    await frame1!.selectOption('select[name="country"]', {
+      value: formData.country,
+    });
+    await frame1!.selectOption('select[name="course"]', {
+      value: formData.course,
+    });
+    await frame1!.selectOption('select[name="departure_date"]', {
+      value: formData.date,
+    });
     await frame1!.fill("textarea", formData.message);
-  
-    // Select checkboxes
+
+    // Agree to terms and optionally sign up for the newsletter
     await frame1!.click("input#tc_agree");
     await frame1!.click("input#newsletter_signup");
-  
-    // Click submit (retry 2 times)
+
+    // Click submit button twice
     const submitButton = await frame1!.$("button[type='submit']");
     for (let i = 0; i < 2; i++) {
       await submitButton?.click();
     }
   }
 
-  /**
-   * Verify if the success message is displayed after form submission.
-   * @returns Promise<void>
-   */
+  // Verify success message after form submission
   async verifySuccessMessage() {
     const frame1 = this.page.frame(EnquirePage.iframeLocator);
     const successAlert = await frame1!.waitForSelector(
@@ -80,7 +74,6 @@ class EnquirePage {
       { state: "visible" }
     );
 
-    // Verify success message
     expect(await successAlert!.textContent()).toContain(
       "Thank you for reaching out to Bushwise."
     );

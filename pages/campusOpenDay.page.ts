@@ -1,68 +1,59 @@
 import { Page, FrameLocator, Locator, expect } from "@playwright/test";
 
-/**
- * CampusOpenDayPage class represents the page object for the contact form.
- * It provides methods to navigate to the campus open day page, submit the form,
- * and verify the success message.
- */
 class CampusOpenDayPage {
   private page: Page;
   frame1: FrameLocator;
   successTextLocator: Locator;
 
-  // Define static constants for locators
+  // Static locators for iframe and success message
   static iframeLocator = "htmlComp-iframe";
-  static thankYouMessage =
-    '//h1[normalize-space()="Thank you for reaching out to Bushwise."]';
+  static thankYouMessage = '//h1[normalize-space()="Your place is booked!"]';
 
   constructor(page: Page) {
     this.page = page;
     this.frame1 = page.frameLocator(CampusOpenDayPage.iframeLocator);
-
-    // Set successText locator within the frame
-    this.successTextLocator = this.frame1.locator(CampusOpenDayPage.thankYouMessage);
+    this.successTextLocator = this.frame1.locator(
+      CampusOpenDayPage.thankYouMessage
+    );
   }
 
-  /**
-   * Navigate to the campus open day page.
-   * @returns Promise<void>
-   */
+  // Navigate to the campus open day page
   async navigate() {
-    await this.page.goto('/campus-open-day');
+    await this.page.goto("/campus-open-day", { timeout: 60000 });
+    // eslint-disable-next-line playwright/no-wait-for-selector
+    await this.page.waitForSelector(
+      `iframe[name="${CampusOpenDayPage.iframeLocator}"]`,
+      { state: "attached", timeout: 60000 }
+    );
   }
 
-  /**
-   * Submit the campus open day form with the provided form data.
-   * @param formData - Object containing form data (firstName, lastName, email, etc.).
-   * @returns Promise<void>
-   */
+  // Submit the form with provided data
   async submitForm(formData: {
-    firstName: string,
-    lastName: string,
-    email: string,
-    phone: string,
-    country: string
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone: string;
+    country: string;
   }): Promise<void> {
     const frame1 = this.page.frame("htmlComp-iframe");
-  
-    // Fill out the input fields with form data
+
+    // Fill out form fields
     await frame1!.fill('input[placeholder="First Name*"]', formData.firstName);
     await frame1!.fill('input[placeholder="Last Name*"]', formData.lastName);
     await frame1!.fill('input[placeholder="Email*"]', formData.email);
     await frame1!.fill('input[placeholder="Phone*"]', formData.phone);
-    await frame1!.selectOption('select[name="country"]', { value: formData.country });
-  
-    // Click submit (retry 2 times)
+    await frame1!.selectOption('select[name="country"]', {
+      value: formData.country,
+    });
+
+    // Click submit button twice
     const submitButton = await frame1!.$("button[type='submit']");
     for (let i = 0; i < 2; i++) {
       await submitButton?.click();
     }
   }
 
-  /**
-   * Verify if the success message is displayed after form submission.
-   * @returns Promise<void>
-   */
+  // Verify the success message is displayed
   async verifySuccessMessage() {
     const frame1 = this.page.frame(CampusOpenDayPage.iframeLocator);
     const successAlert = await frame1!.waitForSelector(
@@ -70,9 +61,9 @@ class CampusOpenDayPage {
       { state: "visible" }
     );
 
-    // Verify success message
+    // Assert success message content
     expect(await successAlert!.textContent()).toContain(
-      "Thank you for reaching out to Bushwise."
+      "Your place is booked!"
     );
   }
 }

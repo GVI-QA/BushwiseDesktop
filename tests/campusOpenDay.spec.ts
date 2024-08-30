@@ -1,26 +1,22 @@
-import { expect, test } from "@playwright/test";
+/* eslint-disable playwright/expect-expect */
+import { test } from "@playwright/test";
 import CampusOpenDayPage from "../pages/campusOpenDay.page";
+import { formTestData } from "../test-data/test-data";
 
 test.describe("CampusOpenDay", () => {
   let campusOpenDayPage: CampusOpenDayPage;
 
+  // Set up the CampusOpenDayPage instance and navigate to the page before each test
   test.beforeEach(async ({ page }) => {
     campusOpenDayPage = new CampusOpenDayPage(page);
     await campusOpenDayPage.navigate();
-    await page.waitForTimeout(8000);
   });
 
+  // Test form submission and success message verification
   test.skip("Fill contact form and verify success message", async () => {
-    const formData = {
-      firstName: "Automated",
-      lastName: "Test",
-      email: "automatedtest@gviprograms.com",
-      phone: "07123456789",
-      country: "United Kingdom",
-    };
+    const formData = formTestData;
 
-    await campusOpenDayPage.submitForm(formData);
-
-    expect(campusOpenDayPage.verifySuccessMessage).toBeTruthy();
+    await campusOpenDayPage.submitForm(formData); 
+    await campusOpenDayPage.verifySuccessMessage();
   });
 });

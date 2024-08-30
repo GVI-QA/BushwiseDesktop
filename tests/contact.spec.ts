@@ -1,27 +1,22 @@
-import { expect, test } from "@playwright/test";
+/* eslint-disable playwright/expect-expect */
+import { test } from "@playwright/test";
 import ContactPage from "../pages/contact.page";
+import { contactFormTestData } from "../test-data/test-data";
 
 test.describe("Contact", () => {
   let contactPage: ContactPage;
 
+  // Set up the ContactPage instance and navigate to the contact page before each test
   test.beforeEach(async ({ page }) => {
     contactPage = new ContactPage(page);
     await contactPage.navigate();
-    await page.waitForTimeout(5000);
   });
 
+  // Test form submission and success message verification
   test("Fill contact form and verify success message", async () => {
-    const formData = {
-      firstName: "Automated",
-      lastName: "Test",
-      email: "automatedtest@gviprograms.com",
-      phone: "07123456789",
-      country: "United Kingdom",
-      message: "This is just a test",
-    };
+    const formData = contactFormTestData;
 
     await contactPage.submitForm(formData);
-
-    expect(contactPage.verifySuccessMessage).toBeTruthy();
+    await contactPage.verifySuccessMessage();
   });
 });

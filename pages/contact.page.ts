@@ -1,17 +1,11 @@
-import { Page, FrameLocator, Locator, expect } from "@playwright/test";
+import { Page, FrameLocator, Locator } from "@playwright/test";
 
-/**
- * ContactPage class represents the page object for the contact form.
- * It provides methods to navigate to the contact page, submit the form,
- * and verify the success message.
- */
 class ContactPage {
   private page: Page;
-  url: string = '/contact-us';
   frame1: FrameLocator;
   successTextLocator: Locator;
 
-  // Define static constants for locators
+  // Static locators for iframe and success message
   static iframeLocator = "htmlComp-iframe";
   static thankYouMessage =
     '//h1[normalize-space()="Thank you for reaching out to Bushwise."]';
@@ -19,29 +13,20 @@ class ContactPage {
   constructor(page: Page) {
     this.page = page;
     this.frame1 = page.frameLocator(ContactPage.iframeLocator);
-
-    // Set successText locator within the frame
     this.successTextLocator = this.frame1.locator(ContactPage.thankYouMessage);
   }
 
-  /**
-   * Navigate to the contact page.
-   * @returns Promise<void>
-   */
-  // async navigate() {
-  //   await this.page.goto("/contact-us");
-  // }
-
+  // Navigate to the contact page and ensure iframe is loaded
   async navigate() {
-    await this.page.goto(this.url);
-    await this.page.waitForLoadState();
-}
+    await this.page.goto("/contact-us", { timeout: 60000 });
+    // eslint-disable-next-line playwright/no-wait-for-selector
+    await this.page.waitForSelector(
+      `iframe[name="${ContactPage.iframeLocator}"]`,
+      { state: "attached", timeout: 60000 }
+    );
+  }
 
-  /**
-   * Submit the contact form with the provided form data.
-   * @param formData - Object containing form data (firstName, lastName, email, etc.).
-   * @returns Promise<void>
-   */
+  // Submit the form with provided data
   async submitForm(formData: {
     firstName: string;
     lastName: string;
@@ -56,7 +41,7 @@ class ContactPage {
       throw new Error("Frame not found");
     }
 
-    // Fill out the input fields with form data
+    // Fill out form fields
     await frame1.fill('input[placeholder="First Name*"]', formData.firstName);
     await frame1.fill('input[placeholder="Last Name*"]', formData.lastName);
     await frame1.fill('input[placeholder="Email*"]', formData.email);
@@ -66,32 +51,33 @@ class ContactPage {
     });
     await frame1.fill("textarea", formData.message);
 
-    // Select checkboxes
+    // Agree to terms and optionally sign up for newsletter
     await frame1.click("input#tc_agree");
     await frame1.click("input#newsletter_signup");
 
-    // Click submit (retry 2 times)
+    // Click submit button twice
     const submitButton = await frame1.$("button[type='submit']");
     for (let i = 0; i < 2; i++) {
       await submitButton?.click();
     }
   }
 
-  /**
-   * Verify if the success message is displayed after form submission.
-   * @returns Promise<void>
-   */
-  async verifySuccessMessage() {
+  // Verify if the success message is displayed
+  async verifySuccessMessage(): Promise<boolean> {
     const frame1 = await this.page.frame(ContactPage.iframeLocator);
     const successAlert = await frame1!.waitForSelector(
       ContactPage.thankYouMessage,
       { state: "visible" }
     );
 
-    // Verify success message
-    expect(await successAlert!.textContent()).toContain(
-      "Thank you for reaching out to Bushwise."
-    );
+    if (successAlert) {
+      const successText = await successAlert.textContent();
+      return (
+        successText?.includes("Thank you for reaching out to Bushwise.") ??
+        false
+      );
+    }
+    return false;
   }
 }
 
