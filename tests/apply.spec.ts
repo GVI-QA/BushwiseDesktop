@@ -9,7 +9,10 @@ test.describe("Apply", () => {
   test.beforeEach(async ({ page }) => {
     applyPage = new ApplyPage(page);
     await applyPage.navigate();
-    await page.waitForTimeout(5000); // Wait to ensure page elements are fully loaded
+    
+    // Wait for the page to be in a network idle state, indicating all resources have loaded
+    // eslint-disable-next-line playwright/no-networkidle
+    await page.waitForLoadState('networkidle');
   });
 
   // Iterate over each test case in the applyTestData array
