@@ -47,7 +47,7 @@ export const applyTestData = courseData.map(({ courseCode, date, description }) 
     date,
     levelOfEducation: "Graduate degree",
     fieldExperience: "NQF4",
-    grantValue: "60%",
+    grantValue: "20%",
   },
 }));
 
