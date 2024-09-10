@@ -22,7 +22,7 @@ class EmploymentGuaranteePage extends BasePage {
         this.bushwiseFieldGuidesLink = page.locator("//a[normalize-space()='Bushwise Field Guides']");
         this.startYourFieldGuidingCareerLink = page.locator("//a[normalize-space()='Start your field guiding career']");
         this.ourUniqueOfferHeading = page.locator("//h3[normalize-space()='Our unique offer']");
-        this.applyNowBtn = page.locator("(//div[@class='StylableButton2545352419__container'])[9]");
+        this.applyNowBtn = page.locator("(//span[@class='StylableButton2545352419__label wixui-button__label'][normalize-space()='APPLY NOW'])[5]");
         this.yourMoneyBackHeading = page.locator("//h3[normalize-space()='Your money back']");
         this.howItWorksHeading = page.locator("//h3[normalize-space()='How it works']");
         this.ourAlumniHeading = page.locator("//span[normalize-space()='Our Alumni']");

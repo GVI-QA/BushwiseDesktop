@@ -16,9 +16,9 @@ class HomePage {
     
     constructor(page: Page){
         this.page = page;
-        this.goIntoTheWildBtn = page.locator("//span[normalize-space()='Go into the wild']");
-        this.learnOnlineBtn = page.locator("//span[normalize-space()='Learn online']");
-        this.experienceMoreBtn = page.locator("//span[normalize-space()='Experience more']");
+        this.goIntoTheWildBtn = page.locator("(//span[contains(text(),'Go into the wild')])[1]");
+        this.learnOnlineBtn = page.locator("(//span[contains(text(),'Learn online')])[1]");
+        this.experienceMoreBtn = page.locator("(//span[contains(text(),'Experience more')])[1]");
         this.campusOnlineRegisterBtn = page.locator("(//a[@class='VU4Mnk wixui-button PlZyDq'])[1]");
         // this.virtualOnlineRegisterBtn = page.locator("(//a[@class='TFOeq0 wixui-button zKbzSQ'])[2]");
         // this.virtualOnlineRegisterBtn = page.locator("(//a[@class='VU4Mnk wixui-button PlZyDq'])[2]");

@@ -19,7 +19,7 @@ class BushwiseRecruitmentPage extends BasePage {
         this.enquireBtn = page.locator("(//span[@class='StylableButton2545352419__label wixui-button__label'][normalize-space()='Enquire'])[3]");
         this.howItWorksHeading = page.locator("//h3[normalize-space()='How does it work?']");
         this.employmentGuaranteeHeading = page.locator("(//span[normalize-space()='The employment guarantee'])[1]");
-        this.readMoreBtn = page.locator("(//div[@class='StylableButton2545352419__container'])[10]");
+        this.readMoreBtn = page.locator("(//span[@class='StylableButton2545352419__container'])[10]");
     }
 
     async navigateTo() {
