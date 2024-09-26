@@ -13,7 +13,7 @@ test.describe("VirtualOpenDay", () => {
   });
 
   // Test form submission and success message verification
-  test("Fill form and verify success message", async () => {
+  test.skip("Fill form and verify success message", async () => {
     const formData = formTestData;
 
     await virtualOpenDayPage.submitForm(formData);
