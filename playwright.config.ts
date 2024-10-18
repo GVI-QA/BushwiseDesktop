@@ -43,6 +43,7 @@ export default defineConfig({
 
     // {
     //   name: 'firefox',
+    //   // use: { ...devices['Desktop Firefox'], headless: false },
     //   use: { ...devices['Desktop Firefox'] },
     // },
 

@@ -16,14 +16,20 @@ class DownloadPage {
     this.successTextLocator = this.frame1.locator(DownloadPage.thankYouMessage);
   }
 
-  // Navigate to the download page and ensure iframe is loaded
+  // Navigate to the download page and ensure iframe is fully loaded
   async navigate() {
     await this.page.goto("/download-a-brochure", { timeout: 60000 });
-    // eslint-disable-next-line playwright/no-wait-for-selector
+    // Wait for iframe to be fully attached
     await this.page.waitForSelector(
       `iframe[name="${DownloadPage.iframeLocator}"]`,
       { state: "attached", timeout: 60000 }
     );
+    // Ensure form inside iframe is loaded
+    const frame1 = this.page.frame(DownloadPage.iframeLocator);
+    await frame1?.waitForSelector('input[placeholder="First Name*"]', {
+      state: "visible",
+      timeout: 60000,
+    });
   }
 
   // Submit the form with provided data
@@ -36,7 +42,7 @@ class DownloadPage {
   }): Promise<void> {
     const frame1 = this.page.frame(DownloadPage.iframeLocator);
 
-    // Fill out form fields
+    // Fill out form fields after ensuring they are visible
     await frame1!.fill('input[placeholder="First Name*"]', formData.firstName);
     await frame1!.fill('input[placeholder="Last Name*"]', formData.lastName);
     await frame1!.fill('input[placeholder="Email*"]', formData.email);
@@ -45,7 +51,7 @@ class DownloadPage {
       value: formData.country,
     });
 
-    // Click submit button twice
+    // Click submit button twice to ensure form submission
     const submitButton = await frame1!.$("button[type='submit']");
     for (let i = 0; i < 2; i++) {
       await submitButton?.click();
@@ -57,9 +63,10 @@ class DownloadPage {
     const frame1 = this.page.frame(DownloadPage.iframeLocator);
     const successAlert = await frame1!.waitForSelector(
       DownloadPage.thankYouMessage,
-      { state: "visible" }
+      { state: "visible", timeout: 60000 }
     );
 
+    // Ensure the success message contains the expected text
     expect(await successAlert!.textContent()).toContain(
       "You’ve just taken an exciting step towards a career in wildlife."
     );
