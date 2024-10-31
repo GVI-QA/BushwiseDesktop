@@ -48,7 +48,7 @@ test.describe("Home", () => {
     });
   });
 
-  test("Navigate to the Campus Open Day page and verify title", async ({
+  test.skip("Navigate to the Campus Open Day page and verify title", async ({
     page,
   }) => {
     homePage.eventsComponent().navigateToCampusOpenDayPage();

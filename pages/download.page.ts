@@ -1,3 +1,4 @@
+/* eslint-disable playwright/no-wait-for-selector */
 import { Page, FrameLocator, Locator, expect } from "@playwright/test";
 
 class DownloadPage {

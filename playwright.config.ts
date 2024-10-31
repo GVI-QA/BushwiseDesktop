@@ -19,6 +19,7 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
+  // workers: 1, // Set the number of workers to 1 for local execution
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [['allure-playwright', {outputFolder: 'allure-results'}], ['line']],
@@ -43,8 +44,8 @@ export default defineConfig({
 
     // {
     //   name: 'firefox',
-    //   // use: { ...devices['Desktop Firefox'], headless: false },
-    //   use: { ...devices['Desktop Firefox'] },
+    //   use: { ...devices['Desktop Firefox'], headless: false },
+    //   // use: { ...devices['Desktop Firefox'] },
     // },
 
     // {

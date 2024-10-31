@@ -22,10 +22,10 @@ class AboutSubmenu extends BasePage {
     this.aboutUs = page.locator("//span[contains(text(),'About us')]");
     this.ourStory = page.locator("//span[contains(text(),'Our story')]");
     this.iFGA = page.locator(
-      "(//span[@class='itemDepth12472627565__label wixui-horizontal-menu__submenu-item-label'][normalize-space()='IFGA'])[1]"
+      "(//span[@class='itemDepth12472627565__label'][normalize-space()='IFGA'])[1]"
     );
     this.meetTheTeam = page.locator(
-      "(//span[@class='itemDepth12472627565__label wixui-horizontal-menu__submenu-item-label'][normalize-space()='Meet the team'])[1]"
+      "//span[contains(text(),'Meet the team')]"
     );
     this.whyBushwise = page.locator("//span[contains(text(),'Why Bushwise?')]");
     this.events = page.locator("//span[contains(text(),'Events')]");

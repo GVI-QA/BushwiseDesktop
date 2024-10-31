@@ -18,7 +18,7 @@ class ResourcesSubmenu {
     constructor(page: Page){
         this.page = page;
         this.resources = page.locator("//span[contains(text(),'RESOURCES')]");
-        this.downloadABrochure = page.locator("(//span[@class='itemDepth12472627565__label wixui-horizontal-menu__submenu-item-label'][normalize-space()='Download a brochure'])[1]");
+        this.downloadABrochure = page.locator("(//span[@class='itemDepth12472627565__label'][normalize-space()='Download a brochure'])[1]");
         this.referAFriend = page.locator("//span[contains(text(),'Refer a friend')]");
         this.faqs = page.locator("//span[contains(text(),'FAQs')]");
         this.parentGuide = page.locator("//span[contains(text(),'Parent Guide')]");
