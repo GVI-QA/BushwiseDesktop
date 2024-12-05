@@ -3,12 +3,22 @@ export const courseData = [
   {
     courseCode: "ZABF0039N",
     date: "2025-07-08",
-    description: "Bushwise International Field Guide Course"
+    description: "IFGA Professional Safari Guide Course - 6/12 months"
   },
   {
     courseCode: "ZABF0038N",
     date: "2025-10-15",
-    description: "Bushwise 60-day Safari Guide Course"
+    description: "IFGA Professional Safari Guide Short Course - 2 months"
+  },
+  {
+    courseCode: "ZABF0044N",
+    date: "2025-11-15",
+    description: "IFGA Safari Guide Training Experience - 7-28 days"
+  },
+  {
+    courseCode: "ZABF0045N",
+    date: "2025-11-01",
+    description: "Safari Guide Training Taster - 3 days"
   },
   {
     courseCode: "ZABF0766M",

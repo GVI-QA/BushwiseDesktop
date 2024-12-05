@@ -35,10 +35,10 @@ test.describe("Placements", () => {
     );
   });
 
-  test("Navigate to Bushwise Professional Field Guide course page and verify title", async ({ page }) => {
+  test("Navigate to Professional Safari Guide Course page and verify title", async ({ page }) => {
     const environmentTitles = {
-      southafrica: "International Field Guide Course | 6 or 12 month Course",
-      international: "International Safari Guide Course | 23 or 50 Week Course",
+      southafrica: "IFGA Professional Safari Guide Course | 6 or 12 month Course",
+      international: "IFGA Professional Safari Guide Course | 6 or 12 month Course",
     };
     const environment = process.env.test_env || "southafrica";
     const expectedTitle = environmentTitles[environment];

@@ -11,34 +11,47 @@ test.describe("Courses", () => {
     await coursesSubmenu.navigate();
   });
 
-  test("Navigate to the Wildlife Courses page and verify title", async ({ page }) => {
+  test("Navigate to the Wildlife Courses page and verify title", async ({
+    page,
+  }) => {
     await coursesSubmenu.navigateToCoursesPage();
-    await expect(page).toHaveTitle("Wildlife Courses | Study Wildlife in South Africa", { timeout: 10000 });
+    await expect(page).toHaveTitle(
+      "Wildlife Courses | Study Wildlife in South Africa",
+      { timeout: 10000 }
+    );
   });
 
-  test("Navigate to the Professional Field Guide Course page and verify title", async ({ page }) => {
+  test("Navigate to the Professional Safari Guide Course page and verify title", async ({
+    page,
+  }) => {
     const environmentTitles = {
-      southafrica: "International Field Guide Course | 6 or 12 month Course",
-      international: "International Safari Guide Course | 23 or 50 Week Course",
+      southafrica:
+        "IFGA Professional Safari Guide Course | 6 or 12 month Course",
+      international:
+        "IFGA Professional Safari Guide Course | 6 or 12 month Course",
     };
     const environment = process.env.test_env || "southafrica";
     const expectedTitle = environmentTitles[environment] as string;
 
     await coursesSubmenu.hoverOverCourses();
-    await coursesSubmenu.navigateToProfessionalFieldGuidingPage();
+    await coursesSubmenu.navigateToProfessionalSafariGuideCoursePage();
     await expect(page).toHaveTitle(expectedTitle, { timeout: 20000 });
   });
 
-  test("Navigate to the 60-day Safari Guide Course page and verify title", async ({ page }) => {
+  test("Navigate to the Professional Safari Guide Short Course page and verify title", async ({
+    page,
+  }) => {
     const environmentTitles = {
-      southafrica: "Field Guide Course | 60 Days to Study Wildlife",
-      international: "Safari Guide Course | 60 Days to Study Wildlife",
+      southafrica:
+        "IFGA Professional Safari Guide Short course | 2 months to Study Wildlife ",
+      international:
+        "IFGA Professional Safari Guide Short course | 2 months to Study Wildlife ",
     };
     const environment = process.env.test_env || "southafrica";
     const expectedTitle = environmentTitles[environment] as string;
 
     await coursesSubmenu.hoverOverCourses();
-    await coursesSubmenu.navigateToSixtyDaySafariPage();
+    await coursesSubmenu.navigateToProfessionalSafariGuideShortCoursePage();
     await expect(page).toHaveTitle(expectedTitle, { timeout: 20000 });
   });
 });
