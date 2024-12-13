@@ -14,6 +14,8 @@ test.describe("Apply", () => {
   // Define a test for each data set in applyTestData
   applyTestData.forEach(({ testName, formData }) => {
     test(`${testName}`, async () => {
+      // await page.pause();
+
       await applyPage.submitForm(formData);
       const isSuccess = await applyPage.verifySuccessMessage();
       expect(isSuccess).toBeTruthy();

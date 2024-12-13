@@ -21,6 +21,7 @@ class ApplyPage {
     // eslint-disable-next-line playwright/no-wait-for-selector
     await this.page.waitForSelector(
       `iframe[name="${ApplyPage.iframeLocator}"]`,
+      // `//iframe[@title='Application Form']`,
       { state: "attached", timeout: 60000 }
     );
   }

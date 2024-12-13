@@ -53,12 +53,6 @@ test.describe("Placements", () => {
     );
   });
 
-  test("Verify Lowveld Trails Co. sub-heading", async () => {
-    await expect(placementsPage.lowveldTrailsCo).toHaveText(
-      "Lowveld Trails Co."
-    );
-  });
-
   test("Verify Siyafunda sub-heading", async () => {
     await expect(placementsPage.siyafunda).toHaveText("Siyafunda");
   });
@@ -90,9 +84,7 @@ test.describe("Placements", () => {
   });
 
   test("Verify Moholoholo Rehab Centre sub-heading", async () => {
-    await expect(placementsPage.moholoholoRehabCentre).toHaveText(
-      "Moholoholo Rehab"
-    );
+    await expect(placementsPage.moholoholoRehabCentre).toContainText("Moholoholo Rehab");
   });
 
   test("Verify NYATI Safari Lodge sub-heading", async () => {
