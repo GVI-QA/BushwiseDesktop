@@ -17,15 +17,36 @@ class DownloadPage {
     this.successTextLocator = this.frame1.locator(DownloadPage.thankYouMessage);
   }
 
-  // Navigate to the download page and ensure iframe is fully loaded
   async navigate() {
     await this.page.goto("/download-a-brochure", { timeout: 60000 });
-    // Wait for iframe to be fully attached
+
+    // Ensure page has fully loaded by waiting for all network requests to finish
+    // eslint-disable-next-line playwright/no-networkidle
+    await this.page.waitForLoadState("networkidle", { timeout: 60000 });
+
+    // Scroll the page incrementally to the bottom
+    await this.page.evaluate(async () => {
+      let totalHeight = document.body.scrollHeight;
+      let currentPosition = window.scrollY;
+      const step = 500;
+      const delay = 200;
+
+      // Scroll until we reach the bottom
+      while (currentPosition + window.innerHeight < totalHeight) {
+        window.scrollBy(0, step);
+        currentPosition += step;
+        totalHeight = document.body.scrollHeight;
+        await new Promise((resolve) => setTimeout(resolve, delay));
+      }
+    });
+
+    // Wait for the iframe to be fully loaded and attached
     await this.page.waitForSelector(
       `iframe[name="${DownloadPage.iframeLocator}"]`,
       { state: "attached", timeout: 60000 }
     );
-    // Ensure form inside iframe is loaded
+
+    // Wait for form inside the iframe to be visible
     const frame1 = this.page.frame(DownloadPage.iframeLocator);
     await frame1?.waitForSelector('input[placeholder="First Name*"]', {
       state: "visible",

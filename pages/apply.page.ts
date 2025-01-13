@@ -15,13 +15,34 @@ class ApplyPage {
     this.successTextLocator = this.frame1.locator(ApplyPage.thankYouMessage);
   }
 
-  // Navigate to the apply page
+  // Navigate to the apply page and handle scrolling
   async navigate() {
     await this.page.goto("/apply-now", { timeout: 60000 });
+
+    // Ensure page has fully loaded by waiting for all network requests to finish
+    // eslint-disable-next-line playwright/no-networkidle
+    await this.page.waitForLoadState("networkidle", { timeout: 60000 });
+
+    // Scroll the page incrementally to the bottom
+    await this.page.evaluate(async () => {
+      let totalHeight = document.body.scrollHeight;
+      let currentPosition = window.scrollY;
+      const step = 500;
+      const delay = 200;
+
+      // Scroll until we reach the bottom
+      while (currentPosition + window.innerHeight < totalHeight) {
+        window.scrollBy(0, step);
+        currentPosition += step;
+        totalHeight = document.body.scrollHeight; // Update total height in case new content loads
+        await new Promise((resolve) => setTimeout(resolve, delay));
+      }
+    });
+
+    // Wait for the iframe to be fully loaded and attached
     // eslint-disable-next-line playwright/no-wait-for-selector
     await this.page.waitForSelector(
       `iframe[name="${ApplyPage.iframeLocator}"]`,
-      // `//iframe[@title='Application Form']`,
       { state: "attached", timeout: 60000 }
     );
   }

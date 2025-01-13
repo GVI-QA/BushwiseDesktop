@@ -13,7 +13,7 @@ test.describe("CampusOpenDay", () => {
   });
 
   // Test form submission and success message verification
-  test.skip("Fill contact form and verify success message", async () => {
+  test("Fill contact form and verify success message", async () => {
     const formData = formTestData;
 
     await campusOpenDayPage.submitForm(formData); 

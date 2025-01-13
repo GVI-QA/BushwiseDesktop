@@ -68,7 +68,7 @@ test.describe("About", () => {
   test("Navigate to Bushwise Campus page and verify title", async () => {
     await basePage.navigateAndVerifyTitle(async () => {
       return await aboutSubmenu.navigateToBushwiseCampusPage();
-    }, "View our Bushwise Campus | Bushwise");
+    }, "Bushwise Campus | Greater Kruger and Makalali National Parks");
   });
 
   test("Navigate to Our Partners page and verify title", async () => {

@@ -20,6 +20,28 @@ class VirtualOpenDayPage {
   // Navigate to the virtual open day page and wait for iframe
   async navigate() {
     await this.page.goto("/virtual-open-day", { timeout: 60000 });
+
+    // Ensure the page is fully loaded by waiting for all network requests to finish
+    // eslint-disable-next-line playwright/no-networkidle
+    await this.page.waitForLoadState("networkidle", { timeout: 60000 });
+
+    // Scroll the page incrementally to the bottom
+    await this.page.evaluate(async () => {
+      let totalHeight = document.body.scrollHeight;
+      let currentPosition = window.scrollY;
+      const step = 500;
+      const delay = 200;
+
+      // Incrementally scroll down the page
+      while (currentPosition + window.innerHeight < totalHeight) {
+        window.scrollBy(0, step);
+        currentPosition += step;
+        totalHeight = document.body.scrollHeight;
+        await new Promise((resolve) => setTimeout(resolve, delay));
+      }
+    });
+
+    // Wait for the iframe to be fully loaded and attached
     // eslint-disable-next-line playwright/no-wait-for-selector
     await this.page.waitForSelector(
       `iframe[name="${VirtualOpenDayPage.iframeLocator}"]`,
@@ -46,7 +68,7 @@ class VirtualOpenDayPage {
       value: formData.country,
     });
 
-    // Click submit button twice
+    // Click the submit button twice
     const submitButton = await frame1!.$("button[type='submit']");
     for (let i = 0; i < 2; i++) {
       await submitButton?.click();
