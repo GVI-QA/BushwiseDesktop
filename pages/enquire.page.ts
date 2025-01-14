@@ -16,14 +16,34 @@ class EnquirePage {
     this.successTextLocator = this.frame1.locator(EnquirePage.thankYouMessage);
   }
 
-  // Navigate to the enquire page and wait for iframe to load
+  // Navigate to the enquire page and wait for iframe to load completely
   async navigate() {
     await this.page.goto("/enquire", { timeout: 60000 });
+
+    // Ensure the iframe is attached
     // eslint-disable-next-line playwright/no-wait-for-selector
     await this.page.waitForSelector(
       `iframe[name="${EnquirePage.iframeLocator}"]`,
       { state: "attached", timeout: 60000 }
     );
+
+    // Get the iframe's frame instance
+    const frame = this.page.frame({ name: EnquirePage.iframeLocator });
+
+    if (!frame) {
+      throw new Error("Iframe not found");
+    }
+
+    // Wait for the iframe's document to be fully loaded
+    await frame.evaluate(() => {
+      return new Promise<void>((resolve) => {
+        if (document.readyState === "complete") {
+          resolve();
+        } else {
+          window.addEventListener("load", () => resolve());
+        }
+      });
+    });
   }
 
   // Submit the enquiry form with provided data

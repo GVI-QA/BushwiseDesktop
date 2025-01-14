@@ -1,0 +1,9 @@
+{
+  "build": {
+    "env": {
+      "NODE_VERSION": "18.x",
+      "PLAYWRIGHT_BROWSERS_PATH": "0",
+      "PW_IGNORE_HOST_REQUIREMENTS": "1"
+    }
+  }
+}
