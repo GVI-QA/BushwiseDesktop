@@ -22,7 +22,7 @@ export const courseData = [
   },
   {
     courseCode: "ZABF0044N",
-    date: "2025-11-15",
+    date: "2025-11-14",
     description: "IFGA Safari Guide Training Experience - 7-28 days"
   },
   {
