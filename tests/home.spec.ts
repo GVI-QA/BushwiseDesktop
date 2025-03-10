@@ -11,8 +11,10 @@ test.describe("Home", () => {
 
   test("Navigate to HomePage and verify title", async ({ page }) => {
     const environmentTitles = {
-      southafrica: "Best Field Guide Training #1 Courses in South Africa | Bushwise",
-      international: "Best Safari Guide Training #1 Courses in South Africa | Bushwise",
+      southafrica:
+        "Best Field Guide Training #1 Courses in South Africa | Bushwise",
+      international:
+        "Best Safari Guide Training #1 Courses in South Africa | Bushwise",
     };
     const environment = process.env.test_env || "southafrica";
     const expectedTitle = environmentTitles[environment] as string;
@@ -48,17 +50,17 @@ test.describe("Home", () => {
     });
   });
 
-  test.skip("Navigate to the Campus Open Day page and verify title", async ({
+  test("Navigate to the Campus Open Day page and verify title", async ({
     page,
   }) => {
     homePage.eventsComponent().navigateToCampusOpenDayPage();
     await expect(page).toHaveTitle(
-      "Join Our Free Campus Open Day | Bushwise Field Guides",
+      "Join the Bushwise Campus Open Day | Experience a wild life",
       { timeout: 10000 }
     );
   });
 
-  test.skip("Navigate to the Virtual Open Day page and verify title", async ({
+  test("Navigate to the Virtual Open Day page and verify title", async ({
     page,
   }) => {
     homePage.eventsComponent().navigateToVirtualOpenDayPage();
