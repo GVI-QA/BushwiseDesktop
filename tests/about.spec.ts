@@ -10,6 +10,7 @@ test.describe("About", () => {
 
   test.beforeEach(async ({ page: _page }) => {
     page = _page;
+    await page.setViewportSize({ width: 1440, height: 900 });
     aboutSubmenu = new AboutSubmenu(page);
     basePage = new BasePage(page);
     await aboutSubmenu.navigate();

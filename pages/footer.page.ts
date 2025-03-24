@@ -18,7 +18,7 @@ class Footer {
     constructor(page: Page){
         this.page = page;
         this.termsAndConditions = page.locator("//a[normalize-space()='Terms & Conditions']");
-        this.privacyPolicy = page.locator("//a[normalize-space()='Privacy Policy']");
+        this.privacyPolicy = page.locator("//a[@class='wixui-rich-text__text'][normalize-space()='Privacy Policy']");
         this.websiteTermOfUse = page.locator("//a[normalize-space()='Website Terms of Use']");
         this.termsOfService = page.locator("//a[normalize-space()='Terms of Service']");
         this.downloadABrochure = page.locator("//a[normalize-space()='Download a Brochure']");
