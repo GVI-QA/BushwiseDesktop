@@ -7,6 +7,7 @@ test.describe("Resources", () => {
   test.beforeEach(async ({ page }) => {
     resourcesSubmenu = new ResourcesSubmenu(page);
     await resourcesSubmenu.navigate();
+    await page.setViewportSize({ width: 1440, height: 900 });
     await resourcesSubmenu.hoverOverResources();
   });
 
