@@ -31,7 +31,7 @@ class AboutSubmenu extends BasePage {
     this.events = page.locator("//span[contains(text(),'Events')]");
     this.blog = page.locator("//span[contains(text(),'Blog')]");
     this.bushwiseCampus = page.locator(
-      "//span[contains(text(),'Our campuses')]"
+      "//span[contains(text(),'Bushwise Campus') or contains(text(),'Our campuses')]"
     );
     this.ourPartners = page.locator("//span[contains(text(),'Our partners')]");
   }
