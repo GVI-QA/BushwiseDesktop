@@ -88,8 +88,65 @@ export const formTestData = {
   birthYear: undefined,
 };
 
-// Contact form test data with message removed
+// Contact form test data
 export const contactFormTestData = {
   ...baseFormData,
   birthYear: undefined
 };
+// Contact Us Recruitment form test data
+interface ContactUsFormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  country?: string;
+  message: string;
+  birthYear?: undefined;
+  interestedIn: "Services for Lodges" | "Services for Professionals";
+}
+
+export const contactUsRecruitmentLodgesTestData: ContactUsFormData = {
+  ...baseFormData,
+  birthYear: undefined,
+  country: undefined,
+  interestedIn: "Services for Lodges"
+};
+
+export const contactUsRecruitmentProfessionalsTestData: ContactUsFormData = {
+  ...baseFormData,
+  birthYear: undefined,
+  country: undefined,
+  interestedIn: "Services for Professionals"
+};
+
+// Lodge forms test data
+export interface LodgeFormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  country: string;
+  lodgeName: string;
+  message: string;
+  roleLookingFor?: string; 
+  roleUrgency?: "ASAP" | "It's not urgent" | "Yesterday"
+}
+
+export const baseLodgeFormData: LodgeFormData = {
+  ...baseFormData,
+  lodgeName: "Test Lodge",
+  roleLookingFor: "Field Guide",
+  roleUrgency: "ASAP",
+};
+
+export const lodgeFormSlugs = [
+  { path: "/lodges/permanent-roles", hasRoleFields: true },
+  { path: "/lodges/short-term-cover", hasRoleFields: true },
+  { path: "/lodges/all-in-one", hasRoleFields: false },
+  { path: "/lodges/graduate-placements", hasRoleFields: false },
+  { path: "/lodges/on-site-training", hasRoleFields: false },
+  { path: "/lodges/ifga-assessments", hasRoleFields: false },
+  { path: "/lodges/team-audit", hasRoleFields: false },
+  { path: "/lodges/guide-academy", hasRoleFields: false },
+  { path: "/lodges/fractional-head-guide", hasRoleFields: false }
+];
